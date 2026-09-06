@@ -88,6 +88,35 @@ function applyWidth(widthPercent: number): void {
       width: 100% !important;
     }
 
+    /* Gemini nests two .edit-container elements: the outer one holds both the
+       prompt box and .edit-button-area (Cancel/Update), the inner one sits
+       inside .query-content.edit-mode and is indented by that element's
+       padding. Sizing both to the same slider width from different left
+       offsets pushed the box past the buttons by exactly that padding, so the
+       actions no longer sat under the box (#edit-actions-desync). The width
+       belongs to the outermost edit container only; anything nested fills it. */
+    .edit-mode .edit-container .edit-container,
+    .edit-mode .edit-container .query-content.edit-mode {
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+
+    /* Every width rule above must measure the border box. These containers
+       carry horizontal padding, so a content-box width overflows its parent by
+       that padding and desyncs the box from the button row again. */
+    ${editModeRules},
+    .edit-mode .edit-container,
+    .query-content.edit-mode .edit-container,
+    .edit-mode .mat-mdc-form-field,
+    .edit-container .mat-mdc-form-field,
+    .edit-mode .edit-form,
+    .edit-mode .mat-mdc-text-field-wrapper,
+    .edit-mode .mat-mdc-form-field-flex,
+    .edit-mode .mdc-text-field,
+    .edit-mode .mat-mdc-form-field-infix {
+      box-sizing: border-box !important;
+    }
+
     /* Target text field wrapper and flex container */
     .edit-mode .mat-mdc-text-field-wrapper,
     .edit-mode .mat-mdc-form-field-flex,

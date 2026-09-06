@@ -72,3 +72,23 @@ behavior, or bundled public assets.
   `path = "../../dist_safari/<name>"`, the group's `children` list, and the Resources build phase.
 - **Guard:** `bun run build:safari` ends with `Safari Xcode resource wiring is complete.` Run it
   whenever you add or rename anything under `public/`; the other browser builds will not catch this.
+
+## A RegExp lookbehind in shared code breaks every feature on Safari 15.4-16.3
+
+- **Trap:** `src/features/prompt/model/promptTemplate.ts` matched legacy `{name}` placeholders with
+  `(?<!\{)\{(?!\{)...` in a module-level `new RegExp`. Safari only gained lookbehind assertions in
+  16.4, while `vite.config.safari.ts` declares `strict_min_version: '15.4'` and
+  `.github/docs/safari/INSTALLATION.md` promises macOS 11+, whose Safari stops at 15.6. The module
+  is statically imported by `src/pages/content/prompt/index.ts`, so the constructor throws during
+  content-script evaluation and takes down every Voyager feature on that page, not just prompt
+  templates. Nothing caught it: `bun run build:safari` passed because
+  `scripts/verify-safari-resources.mjs` only scans the `preserveLatexPipeCommandsInMarkdownTable`
+  fragment, the bundlers cannot see inside a runtime `new RegExp` string, and Node and jsdom both
+  support lookbehind so the unit tests stayed green.
+- **Rule:** No RegExp lookbehind in anything a content script can reach. Match the opening delimiter
+  plainly and inspect the preceding character through the `offset` argument of the `String.replace`
+  callback. Do not stand in for `(?<!x)` with a leading `(^|[^x])` group: it consumes the character,
+  so adjacent matches such as `{a}{b}` silently lose the second one.
+- **Guard:** `src/features/prompt/model/__tests__/promptTemplate.test.ts`
+  (`is built without a RegExp lookbehind so Safari 15.4 can evaluate it`,
+  `migrates adjacent single braces with nothing between them`).

@@ -151,6 +151,22 @@
     "message": "Inserted",
     "description": "Prompt inserted into the chat input"
   },
+  "pm_fill_title": {
+    "message": "Fill in the variables",
+    "description": "Accessible name of the template variable fill surface"
+  },
+  "pm_fill_insert": {
+    "message": "Insert",
+    "description": "Insert the prompt with the entered variable values"
+  },
+  "pm_fill_keep_raw": {
+    "message": "Keep as is",
+    "description": "Insert the prompt body with its placeholders untouched"
+  },
+  "pm_convert_braces": {
+    "message": "Turn {name} into {{name}}",
+    "description": "Action that rewrites single-brace placeholders as template variables"
+  },
   "pm_delete": {
     "message": "Delete",
     "description": "Delete prompt"
@@ -379,7 +395,10 @@
     "message": "Priority",
     "description": "Conversations active in the last three hours"
   },
-  "folder_activity_today": { "message": "Today", "description": "Conversations active today" },
+  "folder_activity_today": {
+    "message": "Today",
+    "description": "Conversations active today"
+  },
   "folder_activity_yesterday": {
     "message": "Yesterday",
     "description": "Conversations active yesterday"
@@ -1244,10 +1263,18 @@
     "message": "Sync Voyager data using your private iCloud storage",
     "description": "iCloud sync description"
   },
-  "syncProvider": { "message": "Storage service" },
-  "syncProviderGoogleDrive": { "message": "Google Drive" },
-  "syncProviderICloud": { "message": "iCloud" },
-  "syncConnectGoogleDrive": { "message": "Connect Google Drive" },
+  "syncProvider": {
+    "message": "Storage service"
+  },
+  "syncProviderGoogleDrive": {
+    "message": "Google Drive"
+  },
+  "syncProviderICloud": {
+    "message": "iCloud"
+  },
+  "syncConnectGoogleDrive": {
+    "message": "Connect Google Drive"
+  },
   "preventAutoScroll": {
     "message": "Prevent auto-scroll to bottom",
     "description": "Feature to prevent auto scrolling to bottom when generating answers"
@@ -1340,15 +1367,21 @@
     "message": "Overwrite local data with the cloud copy? Local changes that have not been uploaded will be lost.",
     "description": "Confirmation before overwriting local sync data"
   },
-  "syncDeleteICloudBackup": { "message": "Delete iCloud backup" },
+  "syncDeleteICloudBackup": {
+    "message": "Delete iCloud backup"
+  },
   "syncDeleteICloudConfirm": {
     "message": "Delete every Voyager backup from iCloud? Local data will stay on this Mac. This cannot be undone."
   },
-  "syncDeletingICloudBackup": { "message": "Deleting iCloud backup…" },
+  "syncDeletingICloudBackup": {
+    "message": "Deleting iCloud backup…"
+  },
   "syncDeleteICloudSuccess": {
     "message": "✓ Deleted {count} iCloud backup files; local data is unchanged"
   },
-  "syncDeleteICloudFailed": { "message": "✗ Could not delete iCloud backup: {error}" },
+  "syncDeleteICloudFailed": {
+    "message": "✗ Could not delete iCloud backup: {error}"
+  },
   "syncMode": {
     "message": "Sync Mode",
     "description": "Sync mode label"
@@ -1665,7 +1698,6 @@
     "message": "Press ESC to close",
     "description": "Fullscreen overlay usage hint"
   },
-
   "enableHighlights": {
     "message": "Enable highlights",
     "description": "Highlight feature toggle label"
@@ -2666,26 +2698,54 @@
     "message": "Use your saved prompts on this site. You'll be asked to grant access.",
     "description": "Top toggle hint for enabling Prompt Manager on a third-party site"
   },
-  "storageQuotaTitle": { "message": "Storage" },
-  "storageQuotaManage": { "message": "Manage storage" },
-  "storageQuotaLocal": { "message": "Extension local" },
-  "storageQuotaSync": { "message": "Synced settings" },
-  "storageQuotaHealthy": { "message": "Healthy" },
-  "storageQuotaAttention": { "message": "Near limit" },
-  "storageQuotaCritical": { "message": "Almost full" },
+  "storageQuotaTitle": {
+    "message": "Storage"
+  },
+  "storageQuotaManage": {
+    "message": "Manage storage"
+  },
+  "storageQuotaLocal": {
+    "message": "Extension local"
+  },
+  "storageQuotaSync": {
+    "message": "Synced settings"
+  },
+  "storageQuotaHealthy": {
+    "message": "Healthy"
+  },
+  "storageQuotaAttention": {
+    "message": "Near limit"
+  },
+  "storageQuotaCritical": {
+    "message": "Almost full"
+  },
   "storageQuotaWarningToast": {
     "message": "Voyager storage is {percent}% full. Open the extension popup to review or clean up stored data."
   },
-  "storageQuotaUnknown": { "message": "Usage unavailable" },
-  "storageQuotaBreakdown": { "message": "Storage breakdown" },
-  "storageQuotaSoftLimit": { "message": "Voyager soft limit" },
+  "storageQuotaUnknown": {
+    "message": "Usage unavailable"
+  },
+  "storageQuotaBreakdown": {
+    "message": "Storage breakdown"
+  },
+  "storageQuotaSoftLimit": {
+    "message": "Voyager soft limit"
+  },
   "storageQuotaEffectiveLimit": {
     "message": "Current effective limit: {size}. Voyager uses the lower of this and your selected soft limit."
   },
-  "storageQuotaCache": { "message": "Rebuildable cache" },
-  "storageQuotaHighlights": { "message": "Highlights" },
-  "storageQuotaOther": { "message": "Other" },
-  "storageQuotaUnlock": { "message": "Expand local storage" },
+  "storageQuotaCache": {
+    "message": "Rebuildable cache"
+  },
+  "storageQuotaHighlights": {
+    "message": "Highlights"
+  },
+  "storageQuotaOther": {
+    "message": "Other"
+  },
+  "storageQuotaUnlock": {
+    "message": "Expand local storage"
+  },
   "storageQuotaSafariLimit": {
     "message": "Safari 15 can only raise local storage from about 5 MB to about 10 MB. It can still fill up."
   },
@@ -2731,12 +2791,24 @@
   "highlightTimelineAriaLabel": {
     "message": "Open saved highlight"
   },
-  "savedLibraryAll": { "message": "All" },
-  "savedLibraryStars": { "message": "Stars" },
-  "savedLibraryHighlights": { "message": "Highlights" },
-  "savedLibraryEmpty": { "message": "No saved items yet" },
-  "savedLibraryNoHighlights": { "message": "No highlights yet" },
-  "savedLibrarySearchPlaceholder": { "message": "Search stars and highlights" },
+  "savedLibraryAll": {
+    "message": "All"
+  },
+  "savedLibraryStars": {
+    "message": "Stars"
+  },
+  "savedLibraryHighlights": {
+    "message": "Highlights"
+  },
+  "savedLibraryEmpty": {
+    "message": "No saved items yet"
+  },
+  "savedLibraryNoHighlights": {
+    "message": "No highlights yet"
+  },
+  "savedLibrarySearchPlaceholder": {
+    "message": "Search stars and highlights"
+  },
   "highlightImportSuccess": {
     "message": "Imported {count} highlight(s)"
   },
@@ -2746,23 +2818,39 @@
   "highlightCloudSyncHint": {
     "message": "Keep highlights in a separate account-scoped Drive file. Highlights are included by default when Drive sync is enabled and always merge safely."
   },
-  "diagnosticsTitle": { "message": "Issue diagnostics" },
+  "diagnosticsTitle": {
+    "message": "Issue diagnostics"
+  },
   "diagnosticsHint": {
     "message": "Preview sanitized environment and plugin settings for issue reports."
   },
-  "diagnosticsPreview": { "message": "Preview" },
-  "diagnosticsPreviewTitle": { "message": "Diagnostics preview" },
+  "diagnosticsPreview": {
+    "message": "Preview"
+  },
+  "diagnosticsPreviewTitle": {
+    "message": "Diagnostics preview"
+  },
   "diagnosticsPrivacyNote": {
     "message": "Review before sharing. Prompts, conversations, accounts, credentials, and private URLs are excluded."
   },
-  "diagnosticsClose": { "message": "Close" },
-  "diagnosticsCopyMarkdown": { "message": "Copy Markdown" },
-  "diagnosticsCopying": { "message": "Copying…" },
-  "diagnosticsCopied": { "message": "Copied" },
+  "diagnosticsClose": {
+    "message": "Close"
+  },
+  "diagnosticsCopyMarkdown": {
+    "message": "Copy Markdown"
+  },
+  "diagnosticsCopying": {
+    "message": "Copying…"
+  },
+  "diagnosticsCopied": {
+    "message": "Copied"
+  },
   "diagnosticsCopyFailed": {
     "message": "Clipboard unavailable. Select the preview manually or download JSON."
   },
-  "diagnosticsDownloadJson": { "message": "Download JSON" },
+  "diagnosticsDownloadJson": {
+    "message": "Download JSON"
+  },
   "promptHistoryTitle": {
     "message": "Prompt History",
     "description": "Prompt History panel text (#923)"

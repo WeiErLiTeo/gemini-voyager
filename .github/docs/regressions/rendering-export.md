@@ -167,3 +167,18 @@ output.
   (`should keep the joiner that holds an emoji sequence together`,
   `should still remove a joiner that only touches an emoji on one side`, and the original
   `should remove zero-width joiner`, which pins the stray-joiner case that motivated the strip).
+
+## Rendered prompt previews must escape angle-bracket text, not sanitize it away
+
+- **Trap:** Prompt bodies render through `marked` + `DOMPurify`. With marked's HTML tokenizers left
+  on, `Translate <text> into <language>.` reached the reader as `Translate ` — `<text>` is an
+  SVG-namespaced name, so the sanitizer dropped the element together with the rest of the block.
+  `<style>` and `<path>` behave the same way, and any other unknown tag such as `<YOUR_API_KEY>` is
+  removed outright. Prompts are exactly where angle-bracket placeholders are common, and the defect
+  is invisible: no console error, no fallback, just missing text.
+- **Rule:** A prompt body is text destined for an LLM, not an HTML document. Disable both HTML
+  tokenizers (`tokenizer: { html, tag }` returning `undefined`) so raw tags reach the text tokenizer
+  and are escaped. Apply it in the shared loader so the hover preview and the list row agree.
+- **Guard:** `src/features/prompt/model/__tests__/promptMarkdown.test.ts`
+  (`keeps angle-bracket placeholders visible instead of letting them be sanitized away`,
+  `pins the defect it fixes: the default pipeline eats the rest of the sentence`).

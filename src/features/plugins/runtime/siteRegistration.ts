@@ -2,7 +2,7 @@
  * Cross-site injection helpers.
  *
  * The base content script is injected only on manifest-declared sites. To run
- * plugins on claude.ai / chatgpt.com / grok.com the extension must, at
+ * plugins on claude.ai / chatgpt.com the extension must, at
  * install/enable time:
  *
  *   1. Request the OPTIONAL host permission for the plugin's origins. This MUST be

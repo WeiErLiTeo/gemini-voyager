@@ -39,6 +39,9 @@ import {
 import type { ConversationReference, DragData, Folder, FolderData } from './types';
 
 const STORAGE_KEY = 'gvFolderData';
+
+/** Growing gaps between account-scope retries, in ms. Length caps the attempts. */
+const ACCOUNT_SCOPE_RETRY_DELAYS = [400, 1200, 3000] as const;
 const ROOT_CONVERSATIONS_ID = '__root_conversations__';
 const MAX_FOLDER_DEPTH = 1;
 const IS_DEBUG = false;
@@ -97,6 +100,9 @@ export class FolderStore {
   private readonly dataSessions = new Map<string, FolderDataSession>();
   private unresolvedData: FolderData = { folders: [], folderContents: {} };
   private accountScopeRequest = 0;
+  private accountScopeRetry: number | null = null;
+  private accountScopeRetryAttempt = 0;
+  private accountScopeRetrying = false;
   accountIsolationEnabled = false;
   accountScope: AccountScope | null = null;
   private activeStorageKey = STORAGE_KEY;
@@ -171,8 +177,11 @@ export class FolderStore {
   }
 
   destroy(): void {
+    // The flush must precede `isDestroyed`, which gates `saveData`; the retry
+    // timer is cancelled straight after so a pending resolution cannot rearm.
     this.flushPendingSaveData();
     this.isDestroyed = true;
+    this.clearAccountScopeRetry();
     this.dataSession?.deactivate();
     this.accountScopeRequest += 1;
     this.teardownConversationActivityTracking();
@@ -1283,6 +1292,8 @@ export class FolderStore {
 
   async refreshAccountScope(): Promise<void> {
     const request = ++this.accountScopeRequest;
+    this.clearAccountScopeRetry();
+    if (!this.accountScopeRetrying) this.accountScopeRetryAttempt = 0;
     const previous = this.dataSession;
     // Flush the old account's pending debounce before releasing its data owner.
     this.flushPendingSaveData();
@@ -1324,6 +1335,7 @@ export class FolderStore {
       this.accountScope = resolvedScope;
       this.activeStorageKey = storageKey;
       session.activate();
+      this.accountScopeRetryAttempt = 0;
       if (session.ready) {
         this.options.onChange('title');
         this.options.onChange('loaded');
@@ -1331,7 +1343,52 @@ export class FolderStore {
     } catch (error) {
       console.error('[FolderStore] Failed to resolve account scope:', error);
       // Keep persistence unbound on failure. A global fallback has no known owner.
+      this.scheduleAccountScopeRetry(request);
     }
+  }
+
+  /**
+   * Re-attempt a failed scope resolution a few times, with growing gaps.
+   *
+   * Firefox is the only target that resolves the scope through the background
+   * page (`AccountIsolationService.shouldResolveScopeInBackground`), so a
+   * background that is not listening yet — right after an extension update, say
+   * — fails the whole round trip. An unbound store is not inert: the panel
+   * renders empty and `saveData` drops every edit while still repainting it, so
+   * a folder the user creates looks saved and is gone on reload. Binding to the
+   * global bucket instead is not an option, because an ownerless bucket can
+   * belong to another account (see `.github/docs/regressions/state-identity-sync.md`).
+   */
+  private scheduleAccountScopeRetry(request: number): void {
+    if (this.isDestroyed || request !== this.accountScopeRequest) return;
+    const delay = ACCOUNT_SCOPE_RETRY_DELAYS[this.accountScopeRetryAttempt];
+    if (delay === undefined) return;
+    this.accountScopeRetryAttempt += 1;
+    this.accountScopeRetry = window.setTimeout(() => {
+      this.accountScopeRetry = null;
+      if (this.isDestroyed || request !== this.accountScopeRequest) return;
+      void this.retryAccountScope();
+    }, delay);
+  }
+
+  private async retryAccountScope(): Promise<void> {
+    this.accountScopeRetrying = true;
+    try {
+      await this.refreshAccountScope();
+    } finally {
+      this.accountScopeRetrying = false;
+    }
+    if (this.isDestroyed || !this.dataSession) return;
+    await this.loadData();
+    if (this.isDestroyed) return;
+    this.options.onChange('title');
+    this.options.onChange('data');
+  }
+
+  private clearAccountScopeRetry(): void {
+    if (this.accountScopeRetry === null) return;
+    window.clearTimeout(this.accountScopeRetry);
+    this.accountScopeRetry = null;
   }
 
   initializeConversationActivityTracking(): Promise<void> {

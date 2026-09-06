@@ -4,9 +4,12 @@ import { promptStorageService } from '@/core/services/StorageService';
 import { StorageKeys } from '@/core/types/common';
 import { type PromptItem } from '@/core/types/sync';
 import { getPromptNameComparisonKey, getPromptNameConflictIds } from '@/core/utils/promptName';
+import { isPromptTemplate } from '@/features/prompt/model/promptTemplate';
+import { getTranslationSync } from '@/utils/i18n';
 
 import { findChatInput, insertTextIntoChatInput } from '../chatInput/index';
 import { findClosestSendActionButton, isSendKeyboardEvent } from '../sendBehavior/sendButton';
+import { type TemplateFillHandle, openTemplateFill } from './PromptTemplateFill';
 
 const ROOT_ID = 'gv-pm-slash-root';
 const LIST_ID = 'gv-pm-slash-list';
@@ -1112,6 +1115,11 @@ export function startPromptSlashCommand(options: SlashPromptOptions = {}): Slash
         })
       : null;
 
+  /* Outlives `close()` on purpose: accepting a template closes the result list
+   * and then opens this, so tearing it down here would dismiss it instantly.
+   * Only `destroy` owns its lifetime. */
+  let templateFill: TemplateFillHandle | null = null;
+
   function close(): void {
     root.hidden = true;
     activeInput = null;
@@ -1262,23 +1270,68 @@ export function startPromptSlashCommand(options: SlashPromptOptions = {}): Slash
     syncPromptSelectionVisuals();
   }
 
-  function confirm(index: number): boolean {
-    if (!activeQuery || !results[index]) return false;
-    const prompt = results[index];
-    const query = activeQuery;
-    const hideInputValue = query.start === 0 && query.end === readText(query.input).length;
+  function applyPrompt(query: PromptQuery, prompt: PromptItem, hideInputValue: boolean): boolean {
     const inserted =
       query.input instanceof HTMLTextAreaElement
         ? replaceTextareaQuery(query, prompt)
         : replaceContentEditableQuery(query, prompt);
     if (!inserted) return false;
     rememberPrompt(query.input, prompt, query.start);
-    if (query.input instanceof HTMLTextAreaElement) {
-      const textarea = query.input;
-      addTextareaToken(prompt, textarea, hideInputValue);
-    } else {
-      addTextareaToken(prompt, query.input, hideInputValue);
+    addTextareaToken(prompt, query.input, hideInputValue);
+    return true;
+  }
+
+  /*
+   * A template collects its values before the token is placed, so the token
+   * carries an already-resolved body. That keeps `expandTokensForSend` and the
+   * textarea overlay markers untouched: they still see one prompt with one
+   * text. "Keep as is" is the deferred path — it stores the body with its
+   * placeholders intact, which then expands literally at send time.
+   */
+  function openTemplateFillForQuery(
+    query: PromptQuery,
+    prompt: PromptItem,
+    hideInputValue: boolean,
+  ): void {
+    templateFill?.close();
+    templateFill = openTemplateFill({
+      text: prompt.text,
+      name: prompt.name?.trim() || undefined,
+      // Anchored to the composer, not to the result list: the list has just
+      // been closed and a hidden element has no rect to position against.
+      anchor: query.input,
+      theme: detectTheme(),
+      labels: {
+        insert: getTranslationSync('pm_fill_insert'),
+        keepRaw: getTranslationSync('pm_fill_keep_raw'),
+        title: getTranslationSync('pm_fill_title'),
+      },
+      onSubmit: (filled) => {
+        templateFill = null;
+        try {
+          query.input.focus?.();
+        } catch {}
+        applyPrompt(query, { ...prompt, text: filled }, hideInputValue);
+      },
+      onCancel: () => {
+        templateFill = null;
+      },
+    });
+  }
+
+  function confirm(index: number): boolean {
+    if (!activeQuery || !results[index]) return false;
+    const prompt = results[index];
+    const query = activeQuery;
+    const hideInputValue = query.start === 0 && query.end === readText(query.input).length;
+
+    if (isPromptTemplate(prompt.text)) {
+      close();
+      openTemplateFillForQuery(query, prompt, hideInputValue);
+      return true;
     }
+
+    if (!applyPrompt(query, prompt, hideInputValue)) return false;
     close();
     return true;
   }
@@ -1611,6 +1664,8 @@ export function startPromptSlashCommand(options: SlashPromptOptions = {}): Slash
 
   return {
     destroy: () => {
+      templateFill?.close();
+      templateFill = null;
       document.removeEventListener('input', onInput, true);
       document.removeEventListener('beforeinput', onBeforeInput, true);
       document.removeEventListener('keydown', onKeydown, true);

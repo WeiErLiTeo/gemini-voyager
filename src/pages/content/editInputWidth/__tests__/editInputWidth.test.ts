@@ -85,4 +85,70 @@ describe('editInputWidth', () => {
       'chat-window-input-container',
     ]);
   });
+
+  it('sizes only the outermost edit container so the actions stay under the box', async () => {
+    const { startEditInputWidthAdjuster } = await import('../index');
+    startEditInputWidthAdjuster();
+
+    const styleText = getInjectedStyle().textContent ?? '';
+
+    // Read the shipped rule back out so this fails if the selector changes.
+    const nestedRule = styleText.match(
+      /(^|\n)\s*(\.edit-mode \.edit-container \.edit-container,[^{]+)\{([^}]+)\}/,
+    );
+    expect(nestedRule).not.toBeNull();
+    const selector = (nestedRule as RegExpMatchArray)[2].trim().replace(/\s*\n\s*/g, ' ');
+    expect((nestedRule as RegExpMatchArray)[3]).toContain('width: 100% !important');
+
+    // Gemini's real edit-mode shape: two nested .edit-container elements, the
+    // outer one also holding .edit-button-area (Cancel/Update). The inner one
+    // is indented by .query-content's padding, so sizing both to the slider
+    // width pushed the box past the buttons by exactly that padding.
+    document.body.innerHTML = `
+      <main>
+        <user-query-content class="user-query-container">
+          <div class="user-query-container edit-mode">
+            <div class="edit-container" id="outer">
+              <div class="query-content ng-star-inserted edit-mode" id="query">
+                <div class="edit-container" id="inner">
+                  <mat-form-field class="mat-mdc-form-field edit-form"></mat-form-field>
+                </div>
+              </div>
+              <div class="edit-button-area">
+                <button type="button">Cancel</button>
+                <button type="button">Update</button>
+              </div>
+            </div>
+          </div>
+        </user-query-content>
+      </main>
+    `;
+
+    const filled = [...document.querySelectorAll(selector)].map((el) => el.id);
+    // The outer container keeps the slider width; everything nested fills it.
+    expect(filled).toContain('inner');
+    expect(filled).toContain('query');
+    expect(filled).not.toContain('outer');
+  });
+
+  it('measures every width rule against the border box', async () => {
+    const { startEditInputWidthAdjuster } = await import('../index');
+    startEditInputWidthAdjuster();
+
+    const styleText = getInjectedStyle().textContent ?? '';
+    const borderBoxRule = styleText.match(/([^{}]+)\{\s*box-sizing: border-box !important;\s*\}/);
+    expect(borderBoxRule).not.toBeNull();
+    const selector = (borderBoxRule as RegExpMatchArray)[1];
+
+    // These containers carry horizontal padding. A content-box width overflows
+    // the parent by that padding and desyncs the box from the button row.
+    for (const needed of [
+      '.query-content.edit-mode',
+      '.edit-mode .edit-container',
+      '.edit-mode .edit-form',
+      '.edit-mode .mat-mdc-form-field-infix',
+    ]) {
+      expect(selector).toContain(needed);
+    }
+  });
 });

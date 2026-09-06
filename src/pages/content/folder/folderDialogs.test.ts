@@ -124,6 +124,34 @@ describe('folder dialogs', () => {
     expect(document.querySelector('.gv-folder-rename-inline')).toBeNull();
   });
 
+  it('keeps the input-bearing modals across a panel remount and drops the anchored ones', () => {
+    const list = mountList();
+    const onSave = vi.fn();
+    const onMove = vi.fn();
+    dialogs.openInstructions('Original', onSave);
+    dialogs.openMove([], onMove);
+    dialogs.openCreate(list, null, vi.fn());
+    dialogs.openColor('parent', undefined, new MouseEvent('click'), vi.fn());
+
+    const textarea = query<HTMLTextAreaElement>('.gv-fi-textarea');
+    textarea.value = 'half-typed instructions';
+
+    dialogs.closeTransient();
+
+    // The two modals hold unsaved input and survive, textarea contents included.
+    expect(document.querySelector('.gv-fi-overlay')).not.toBeNull();
+    expect(document.querySelector('.gv-folder-dialog-overlay')).not.toBeNull();
+    expect(query<HTMLTextAreaElement>('.gv-fi-textarea').value).toBe('half-typed instructions');
+    // The row-anchored views would be stranded against a rebuilt list, so they go.
+    expect(document.querySelector('.gv-folder-name-input')).toBeNull();
+    expect(document.querySelector('.gv-color-picker-dialog')).toBeNull();
+
+    // A full stop still takes everything.
+    dialogs.closeAll();
+    expect(document.querySelector('.gv-fi-overlay')).toBeNull();
+    expect(document.querySelector('.gv-folder-dialog-overlay')).toBeNull();
+  });
+
   it('closes only inline drafts during list refresh and leaves an open move dialog usable', () => {
     const list = mountList();
     const onCreate = vi.fn();

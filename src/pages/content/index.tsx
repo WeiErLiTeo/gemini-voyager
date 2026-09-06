@@ -703,7 +703,7 @@ function handleVisibilityChange(): void {
 
     // If not a known site, check if it's a custom website (async)
     if (!isSupportedSite) {
-      // Third-party plugin platforms (Claude / ChatGPT / Grok …): the plugin
+      // Third-party plugin platforms (Claude / ChatGPT …): the plugin
       // host and platform theme already ran above. Start the cross-site Voyager
       // features that belong everywhere — currently just the Prompt Manager
       // floating ball. Native function plugins such as formula-copy and input

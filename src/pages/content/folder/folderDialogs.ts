@@ -37,12 +37,20 @@ export type FolderDialogs = {
     kind?: 'folder' | 'conversation',
   ) => void;
   closeInline: () => void;
+  /** Close everything except the modals that hold unsaved input. */
+  closeTransient: () => void;
   closeAll: () => void;
 };
 
 type DialogView = {
   element: HTMLElement;
   inline: boolean;
+  /**
+   * A body-level dialog holding user input, which must outlive a panel remount.
+   * Everything else is anchored to a sidebar row and is stranded at stale
+   * coordinates once that row is rebuilt, so it is closed instead.
+   */
+  modal: boolean;
   signal: AbortSignal;
   close: () => void;
   defer: (action: () => void, delay: number) => void;
@@ -62,12 +70,18 @@ export function createFolderDialogs(): FolderDialogs {
   let activeColor: { view: DialogView; folderId: string } | null = null;
   let conversationMenu: DialogView | null = null;
 
-  const own = (element: HTMLElement, inline = false, restore?: () => void): DialogView => {
+  const own = (
+    element: HTMLElement,
+    inline = false,
+    restore?: () => void,
+    modal = false,
+  ): DialogView => {
     const controller = new AbortController();
     const timers = new Set<number>();
     const view: DialogView = {
       element,
       inline,
+      modal,
       signal: controller.signal,
       close: () => {
         if (controller.signal.aborted) return;
@@ -301,7 +315,7 @@ export function createFolderDialogs(): FolderDialogs {
     openMove: (folders, onSelect) => {
       const overlay = document.createElement('div');
       overlay.className = 'gv-folder-dialog-overlay';
-      const view = own(overlay);
+      const view = own(overlay, false, undefined, true);
       const dialog = document.createElement('div');
       dialog.className = 'gv-folder-dialog';
       const title = document.createElement('div');
@@ -393,7 +407,7 @@ export function createFolderDialogs(): FolderDialogs {
       const maxChars = 10000;
       const overlay = document.createElement('div');
       overlay.className = 'gv-fi-overlay';
-      const view = own(overlay);
+      const view = own(overlay, false, undefined, true);
       const dialog = document.createElement('div');
       dialog.className = 'gv-fi-dialog';
       dialog.setAttribute('role', 'dialog');
@@ -526,6 +540,9 @@ export function createFolderDialogs(): FolderDialogs {
 
     closeInline: () => {
       for (const view of views) if (view.inline) view.close();
+    },
+    closeTransient: () => {
+      for (const view of views) if (!view.modal) view.close();
     },
     closeAll: () => {
       for (const view of views) view.close();

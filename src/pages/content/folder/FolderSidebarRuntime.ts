@@ -12,7 +12,7 @@ export type FolderMountMode = 'sidebar' | 'floating';
 export interface FolderSidebarRuntimeOptions {
   createPanel: () => HTMLElement;
   onPanelMount: (panel: HTMLElement, sidebar: HTMLElement) => void;
-  onPanelUnmount: () => void;
+  onPanelUnmount: (reason: 'remount' | 'stop') => void;
   nativeSidebar: NativeSidebarObserver;
   nativeMenus: NativeConversationMenus;
   floating: {
@@ -99,7 +99,7 @@ export class FolderSidebarRuntime {
       this.invalidateMount();
       this.fallbackActive = false;
       this.anchorMissingSince = null;
-      this.unmountPanel();
+      this.unmountPanel('remount');
       this.startNativeMenus();
       const generation = this.generation;
       void this.waitForSidebar().then((sidebar) => {
@@ -134,7 +134,7 @@ export class FolderSidebarRuntime {
     if (this.mountPromise) return this.mountPromise;
     const generation = this.generation;
     this.remounting = remounting;
-    this.unmountPanel();
+    this.unmountPanel('remount');
     this.ensureRecoveryWatchers();
     this.startNativeMenus();
 
@@ -186,7 +186,7 @@ export class FolderSidebarRuntime {
     this.floatingOpenPanel = null;
     this.invalidateMount();
     this.teardownRecoveryWatchers();
-    this.unmountPanel();
+    this.unmountPanel('stop');
     this.options.nativeSidebar.stop();
     this.options.nativeMenus.stop();
     this.fallbackActive = false;
@@ -219,8 +219,8 @@ export class FolderSidebarRuntime {
     this.options.nativeSidebar.observe(sidebar);
   }
 
-  private unmountPanel(): void {
-    this.options.onPanelUnmount();
+  private unmountPanel(reason: 'remount' | 'stop'): void {
+    this.options.onPanelUnmount(reason);
     this.options.nativeSidebar.disconnect();
     this.options.nativeMenus.disconnectPanels();
     this.positionObserver?.disconnect();

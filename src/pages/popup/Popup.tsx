@@ -1164,7 +1164,7 @@ export default function Popup({ sourceTabId }: PopupProps = {}) {
     [pluginManifests, pluginSourceIds, pluginState],
   );
   // True for non-native web pages even before the plugin manifest list loads.
-  // Keeps Claude / ChatGPT / Grok and arbitrary third-party sites in their
+  // Keeps Claude / ChatGPT and arbitrary third-party sites in their
   // plugin-only popup instead of falling back to Gemini's full settings UI.
   const isPluginSite = useMemo(
     () => isPluginPopupSite(activeUrl, siteScopedManifests),
@@ -1193,7 +1193,6 @@ export default function Popup({ sourceTabId }: PopupProps = {}) {
       aistudio: 'AI Studio',
       claude: 'Claude',
       chatgpt: 'ChatGPT',
-      grok: 'Grok',
     };
     return activeSiteId ? (labels[activeSiteId] ?? activeSiteId) : '';
   }, [activeSiteId]);

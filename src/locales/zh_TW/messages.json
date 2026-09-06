@@ -151,6 +151,22 @@
     "message": "已插入",
     "description": "提示詞已插入輸入框"
   },
+  "pm_fill_title": {
+    "message": "填寫變數",
+    "description": "Accessible name of the template variable fill surface"
+  },
+  "pm_fill_insert": {
+    "message": "插入",
+    "description": "Insert the prompt with the entered variable values"
+  },
+  "pm_fill_keep_raw": {
+    "message": "保持原樣",
+    "description": "Insert the prompt body with its placeholders untouched"
+  },
+  "pm_convert_braces": {
+    "message": "把 {name} 轉成 {{name}}",
+    "description": "Action that rewrites single-brace placeholders as template variables"
+  },
   "pm_delete": {
     "message": "刪除",
     "description": "刪除 prompt"
@@ -375,11 +391,26 @@
     "message": "關閉動態檢視",
     "description": "關閉注意力優先的動態檢視"
   },
-  "folder_activity_priority": { "message": "優先", "description": "最近三小時內活躍的對話" },
-  "folder_activity_today": { "message": "今天", "description": "今天有對話的分組" },
-  "folder_activity_yesterday": { "message": "昨天", "description": "昨天有對話的分組" },
-  "folder_activity_empty": { "message": "資料夾中還沒有對話", "description": "動態檢視空狀態" },
-  "folder_activity_top_level": { "message": "頂層", "description": "未放入具名資料夾的對話" },
+  "folder_activity_priority": {
+    "message": "優先",
+    "description": "最近三小時內活躍的對話"
+  },
+  "folder_activity_today": {
+    "message": "今天",
+    "description": "今天有對話的分組"
+  },
+  "folder_activity_yesterday": {
+    "message": "昨天",
+    "description": "昨天有對話的分組"
+  },
+  "folder_activity_empty": {
+    "message": "資料夾中還沒有對話",
+    "description": "動態檢視空狀態"
+  },
+  "folder_activity_top_level": {
+    "message": "頂層",
+    "description": "未放入具名資料夾的對話"
+  },
   "folder_create": {
     "message": "建立資料夾",
     "description": "建立資料夾按鈕提示"
@@ -1200,10 +1231,18 @@
     "message": "透過你的私人 iCloud 空間同步 Voyager 資料",
     "description": "iCloud sync description"
   },
-  "syncProvider": { "message": "儲存服務" },
-  "syncProviderGoogleDrive": { "message": "Google Drive" },
-  "syncProviderICloud": { "message": "iCloud" },
-  "syncConnectGoogleDrive": { "message": "連接 Google Drive" },
+  "syncProvider": {
+    "message": "儲存服務"
+  },
+  "syncProviderGoogleDrive": {
+    "message": "Google Drive"
+  },
+  "syncProviderICloud": {
+    "message": "iCloud"
+  },
+  "syncConnectGoogleDrive": {
+    "message": "連接 Google Drive"
+  },
   "syncModeDisabled": {
     "message": "已停用",
     "description": "同步模式停用選項"
@@ -1288,13 +1327,21 @@
     "message": "確定要用雲端資料覆蓋本機資料嗎？尚未上傳的本機變更將會遺失。",
     "description": "覆蓋本機同步資料前的確認"
   },
-  "syncDeleteICloudBackup": { "message": "刪除 iCloud 備份" },
+  "syncDeleteICloudBackup": {
+    "message": "刪除 iCloud 備份"
+  },
   "syncDeleteICloudConfirm": {
     "message": "刪除 iCloud 中所有 Voyager 備份？本機資料會保留，此操作無法復原。"
   },
-  "syncDeletingICloudBackup": { "message": "正在刪除 iCloud 備份…" },
-  "syncDeleteICloudSuccess": { "message": "✓ 已刪除 {count} 個 iCloud 備份檔案，本機資料未變更" },
-  "syncDeleteICloudFailed": { "message": "✗ 無法刪除 iCloud 備份：{error}" },
+  "syncDeletingICloudBackup": {
+    "message": "正在刪除 iCloud 備份…"
+  },
+  "syncDeleteICloudSuccess": {
+    "message": "✓ 已刪除 {count} 個 iCloud 備份檔案，本機資料未變更"
+  },
+  "syncDeleteICloudFailed": {
+    "message": "✗ 無法刪除 iCloud 備份：{error}"
+  },
   "syncMode": {
     "message": "同步模式",
     "description": "同步模式標籤"
@@ -1611,7 +1658,6 @@
     "message": "按 ESC 關閉",
     "description": "Fullscreen overlay usage hint"
   },
-
   "enableHighlights": {
     "message": "啟用醒目標記",
     "description": "醒目標記功能開關標籤"
@@ -2652,26 +2698,54 @@
     "message": "在此網站使用你儲存的提示詞。開啟時需要授權存取該網站。",
     "description": "Top toggle hint for enabling Prompt Manager on a third-party site"
   },
-  "storageQuotaTitle": { "message": "儲存空間" },
-  "storageQuotaManage": { "message": "管理儲存空間" },
-  "storageQuotaLocal": { "message": "擴充功能本機資料" },
-  "storageQuotaSync": { "message": "同步設定" },
-  "storageQuotaHealthy": { "message": "空間充足" },
-  "storageQuotaAttention": { "message": "接近上限" },
-  "storageQuotaCritical": { "message": "即將存滿" },
+  "storageQuotaTitle": {
+    "message": "儲存空間"
+  },
+  "storageQuotaManage": {
+    "message": "管理儲存空間"
+  },
+  "storageQuotaLocal": {
+    "message": "擴充功能本機資料"
+  },
+  "storageQuotaSync": {
+    "message": "同步設定"
+  },
+  "storageQuotaHealthy": {
+    "message": "空間充足"
+  },
+  "storageQuotaAttention": {
+    "message": "接近上限"
+  },
+  "storageQuotaCritical": {
+    "message": "即將存滿"
+  },
   "storageQuotaWarningToast": {
     "message": "Voyager 儲存空間已使用 {percent}%。請開啟擴充功能彈出視窗查看或清理資料。"
   },
-  "storageQuotaUnknown": { "message": "無法讀取用量" },
-  "storageQuotaBreakdown": { "message": "儲存明細" },
-  "storageQuotaSoftLimit": { "message": "Voyager 軟上限" },
+  "storageQuotaUnknown": {
+    "message": "無法讀取用量"
+  },
+  "storageQuotaBreakdown": {
+    "message": "儲存明細"
+  },
+  "storageQuotaSoftLimit": {
+    "message": "Voyager 軟上限"
+  },
   "storageQuotaEffectiveLimit": {
     "message": "目前實際上限：{size}。Voyager 會採用此值與所選軟上限中較低者。"
   },
-  "storageQuotaCache": { "message": "可重建快取" },
-  "storageQuotaHighlights": { "message": "醒目標記" },
-  "storageQuotaOther": { "message": "其他" },
-  "storageQuotaUnlock": { "message": "擴充本機空間" },
+  "storageQuotaCache": {
+    "message": "可重建快取"
+  },
+  "storageQuotaHighlights": {
+    "message": "醒目標記"
+  },
+  "storageQuotaOther": {
+    "message": "其他"
+  },
+  "storageQuotaUnlock": {
+    "message": "擴充本機空間"
+  },
   "storageQuotaSafariLimit": {
     "message": "Safari 15 只能把本機儲存空間從約 5 MB 提升到約 10 MB，仍然可能存滿。"
   },
@@ -2687,44 +2761,96 @@
   "storageQuotaDraftClearConfirm": {
     "message": "刪除所有尚未傳送的草稿？此操作無法復原。"
   },
-  "highlightAction": { "message": "醒目標示" },
-  "highlightSaved": { "message": "醒目標示已儲存" },
-  "highlightSaveFailed": { "message": "無法儲存醒目標示" },
-  "highlightDeleteFailed": { "message": "無法刪除醒目標示" },
-  "highlightNotePlaceholder": { "message": "新增備註（選填）" },
-  "highlightColor": { "message": "醒目標示顏色" },
-  "highlightCustomColor": { "message": "自訂醒目標示顏色" },
-  "highlightTooLong": { "message": "選取內容太長，請縮小範圍。" },
-  "highlightAriaLabel": { "message": "已儲存的醒目標示。開啟註解。" },
-  "highlightTimelineAriaLabel": { "message": "開啟已儲存的醒目標示" },
-  "savedLibraryAll": { "message": "全部" },
-  "savedLibraryStars": { "message": "星號" },
-  "savedLibraryHighlights": { "message": "醒目標示" },
-  "savedLibraryEmpty": { "message": "尚無收藏內容" },
-  "savedLibraryNoHighlights": { "message": "尚無醒目標示" },
-  "savedLibrarySearchPlaceholder": { "message": "搜尋星號與醒目標示" },
-  "highlightImportSuccess": { "message": "已匯入 {count} 則醒目標示" },
-  "highlightCloudSync": { "message": "同步醒目標示" },
+  "highlightAction": {
+    "message": "醒目標示"
+  },
+  "highlightSaved": {
+    "message": "醒目標示已儲存"
+  },
+  "highlightSaveFailed": {
+    "message": "無法儲存醒目標示"
+  },
+  "highlightDeleteFailed": {
+    "message": "無法刪除醒目標示"
+  },
+  "highlightNotePlaceholder": {
+    "message": "新增備註（選填）"
+  },
+  "highlightColor": {
+    "message": "醒目標示顏色"
+  },
+  "highlightCustomColor": {
+    "message": "自訂醒目標示顏色"
+  },
+  "highlightTooLong": {
+    "message": "選取內容太長，請縮小範圍。"
+  },
+  "highlightAriaLabel": {
+    "message": "已儲存的醒目標示。開啟註解。"
+  },
+  "highlightTimelineAriaLabel": {
+    "message": "開啟已儲存的醒目標示"
+  },
+  "savedLibraryAll": {
+    "message": "全部"
+  },
+  "savedLibraryStars": {
+    "message": "星號"
+  },
+  "savedLibraryHighlights": {
+    "message": "醒目標示"
+  },
+  "savedLibraryEmpty": {
+    "message": "尚無收藏內容"
+  },
+  "savedLibraryNoHighlights": {
+    "message": "尚無醒目標示"
+  },
+  "savedLibrarySearchPlaceholder": {
+    "message": "搜尋星號與醒目標示"
+  },
+  "highlightImportSuccess": {
+    "message": "已匯入 {count} 則醒目標示"
+  },
+  "highlightCloudSync": {
+    "message": "同步醒目標示"
+  },
   "highlightCloudSyncHint": {
     "message": "將醒目標示儲存在依帳號隔離的獨立 Drive 檔案中。啟用 Drive 同步後預設包含醒目標示，並一律安全合併。"
   },
-  "diagnosticsTitle": { "message": "問題診斷" },
+  "diagnosticsTitle": {
+    "message": "問題診斷"
+  },
   "diagnosticsHint": {
     "message": "預覽用於 Issue 回報的脫敏環境與外掛設定。"
   },
-  "diagnosticsPreview": { "message": "預覽" },
-  "diagnosticsPreviewTitle": { "message": "診斷資訊預覽" },
+  "diagnosticsPreview": {
+    "message": "預覽"
+  },
+  "diagnosticsPreviewTitle": {
+    "message": "診斷資訊預覽"
+  },
   "diagnosticsPrivacyNote": {
     "message": "分享前請先檢查。不包含提示詞、對話、帳號、憑證及私人網址。"
   },
-  "diagnosticsClose": { "message": "關閉" },
-  "diagnosticsCopyMarkdown": { "message": "複製 Markdown" },
-  "diagnosticsCopying": { "message": "正在複製…" },
-  "diagnosticsCopied": { "message": "已複製" },
+  "diagnosticsClose": {
+    "message": "關閉"
+  },
+  "diagnosticsCopyMarkdown": {
+    "message": "複製 Markdown"
+  },
+  "diagnosticsCopying": {
+    "message": "正在複製…"
+  },
+  "diagnosticsCopied": {
+    "message": "已複製"
+  },
   "diagnosticsCopyFailed": {
     "message": "無法存取剪貼簿，請手動選取預覽內容或下載 JSON。"
   },
-  "diagnosticsDownloadJson": { "message": "下載 JSON" },
+  "diagnosticsDownloadJson": {
+    "message": "下載 JSON"
+  },
   "promptHistoryTitle": {
     "message": "提示詞歷史",
     "description": "Prompt History panel text (#923)"

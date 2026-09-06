@@ -151,6 +151,22 @@
     "message": "Insertado",
     "description": "Prompt inserted into the chat input"
   },
+  "pm_fill_title": {
+    "message": "Rellenar las variables",
+    "description": "Accessible name of the template variable fill surface"
+  },
+  "pm_fill_insert": {
+    "message": "Insertar",
+    "description": "Insert the prompt with the entered variable values"
+  },
+  "pm_fill_keep_raw": {
+    "message": "Dejar como está",
+    "description": "Insert the prompt body with its placeholders untouched"
+  },
+  "pm_convert_braces": {
+    "message": "Convertir {name} en {{name}}",
+    "description": "Action that rewrites single-brace placeholders as template variables"
+  },
   "pm_delete": {
     "message": "Eliminar",
     "description": "Delete prompt"
@@ -379,8 +395,14 @@
     "message": "Prioridad",
     "description": "Conversaciones activas durante las últimas tres horas"
   },
-  "folder_activity_today": { "message": "Hoy", "description": "Conversaciones activas hoy" },
-  "folder_activity_yesterday": { "message": "Ayer", "description": "Conversaciones activas ayer" },
+  "folder_activity_today": {
+    "message": "Hoy",
+    "description": "Conversaciones activas hoy"
+  },
+  "folder_activity_yesterday": {
+    "message": "Ayer",
+    "description": "Conversaciones activas ayer"
+  },
   "folder_activity_empty": {
     "message": "Aún no hay conversaciones en carpetas",
     "description": "Estado vacío de actividad"
@@ -1249,10 +1271,18 @@
     "message": "Sincroniza los datos de Voyager con tu almacenamiento privado de iCloud",
     "description": "iCloud sync description"
   },
-  "syncProvider": { "message": "Servicio de almacenamiento" },
-  "syncProviderGoogleDrive": { "message": "Google Drive" },
-  "syncProviderICloud": { "message": "iCloud" },
-  "syncConnectGoogleDrive": { "message": "Conectar Google Drive" },
+  "syncProvider": {
+    "message": "Servicio de almacenamiento"
+  },
+  "syncProviderGoogleDrive": {
+    "message": "Google Drive"
+  },
+  "syncProviderICloud": {
+    "message": "iCloud"
+  },
+  "syncConnectGoogleDrive": {
+    "message": "Conectar Google Drive"
+  },
   "syncModeDisabled": {
     "message": "Desactivado",
     "description": "Sync mode disabled option"
@@ -1337,15 +1367,21 @@
     "message": "¿Sobrescribir los datos locales con la copia de la nube? Se perderán los cambios locales que no se hayan subido.",
     "description": "Confirmation before overwriting local sync data"
   },
-  "syncDeleteICloudBackup": { "message": "Eliminar copia de iCloud" },
+  "syncDeleteICloudBackup": {
+    "message": "Eliminar copia de iCloud"
+  },
   "syncDeleteICloudConfirm": {
     "message": "¿Eliminar todas las copias de Voyager de iCloud? Los datos locales seguirán en este Mac. Esta acción no se puede deshacer."
   },
-  "syncDeletingICloudBackup": { "message": "Eliminando copia de iCloud…" },
+  "syncDeletingICloudBackup": {
+    "message": "Eliminando copia de iCloud…"
+  },
   "syncDeleteICloudSuccess": {
     "message": "✓ Se eliminaron {count} archivos de iCloud; los datos locales no cambiaron"
   },
-  "syncDeleteICloudFailed": { "message": "✗ No se pudo eliminar la copia de iCloud: {error}" },
+  "syncDeleteICloudFailed": {
+    "message": "✗ No se pudo eliminar la copia de iCloud: {error}"
+  },
   "syncMode": {
     "message": "Modo sinc.",
     "description": "Sync mode label"
@@ -1662,7 +1698,6 @@
     "message": "Pulsa ESC para cerrar",
     "description": "Fullscreen overlay usage hint"
   },
-
   "enableHighlights": {
     "message": "Activar resaltados",
     "description": "Highlight feature toggle label"
@@ -2663,26 +2698,54 @@
     "message": "Usa tus prompts guardados en este sitio. Se te pedirá conceder acceso.",
     "description": "Top toggle hint for enabling Prompt Manager on a third-party site"
   },
-  "storageQuotaTitle": { "message": "Almacenamiento" },
-  "storageQuotaManage": { "message": "Gestionar almacenamiento" },
-  "storageQuotaLocal": { "message": "Datos locales de la extensión" },
-  "storageQuotaSync": { "message": "Ajustes sincronizados" },
-  "storageQuotaHealthy": { "message": "Espacio suficiente" },
-  "storageQuotaAttention": { "message": "Cerca del límite" },
-  "storageQuotaCritical": { "message": "Casi lleno" },
+  "storageQuotaTitle": {
+    "message": "Almacenamiento"
+  },
+  "storageQuotaManage": {
+    "message": "Gestionar almacenamiento"
+  },
+  "storageQuotaLocal": {
+    "message": "Datos locales de la extensión"
+  },
+  "storageQuotaSync": {
+    "message": "Ajustes sincronizados"
+  },
+  "storageQuotaHealthy": {
+    "message": "Espacio suficiente"
+  },
+  "storageQuotaAttention": {
+    "message": "Cerca del límite"
+  },
+  "storageQuotaCritical": {
+    "message": "Casi lleno"
+  },
   "storageQuotaWarningToast": {
     "message": "El almacenamiento de Voyager está al {percent} %. Abre la ventana de la extensión para revisarlo o liberar espacio."
   },
-  "storageQuotaUnknown": { "message": "Uso no disponible" },
-  "storageQuotaBreakdown": { "message": "Desglose del almacenamiento" },
-  "storageQuotaSoftLimit": { "message": "Límite flexible de Voyager" },
+  "storageQuotaUnknown": {
+    "message": "Uso no disponible"
+  },
+  "storageQuotaBreakdown": {
+    "message": "Desglose del almacenamiento"
+  },
+  "storageQuotaSoftLimit": {
+    "message": "Límite flexible de Voyager"
+  },
   "storageQuotaEffectiveLimit": {
     "message": "Límite efectivo actual: {size}. Voyager aplica el menor entre este valor y el límite flexible elegido."
   },
-  "storageQuotaCache": { "message": "Caché regenerable" },
-  "storageQuotaHighlights": { "message": "Destacados" },
-  "storageQuotaOther": { "message": "Otros" },
-  "storageQuotaUnlock": { "message": "Ampliar almacenamiento local" },
+  "storageQuotaCache": {
+    "message": "Caché regenerable"
+  },
+  "storageQuotaHighlights": {
+    "message": "Destacados"
+  },
+  "storageQuotaOther": {
+    "message": "Otros"
+  },
+  "storageQuotaUnlock": {
+    "message": "Ampliar almacenamiento local"
+  },
   "storageQuotaSafariLimit": {
     "message": "Safari 15 solo puede ampliar el almacenamiento local de unos 5 MB a unos 10 MB. Aun así puede llenarse."
   },
@@ -2698,46 +2761,96 @@
   "storageQuotaDraftClearConfirm": {
     "message": "¿Eliminar todos los borradores sin enviar? Esta acción no se puede deshacer."
   },
-  "highlightAction": { "message": "Resaltar" },
-  "highlightSaved": { "message": "Texto resaltado guardado" },
-  "highlightSaveFailed": { "message": "No se pudo guardar el texto resaltado" },
-  "highlightDeleteFailed": { "message": "No se pudo eliminar el texto resaltado" },
-  "highlightNotePlaceholder": { "message": "Añadir una nota (opcional)" },
-  "highlightColor": { "message": "Color del resaltado" },
-  "highlightCustomColor": { "message": "Elegir un color personalizado" },
+  "highlightAction": {
+    "message": "Resaltar"
+  },
+  "highlightSaved": {
+    "message": "Texto resaltado guardado"
+  },
+  "highlightSaveFailed": {
+    "message": "No se pudo guardar el texto resaltado"
+  },
+  "highlightDeleteFailed": {
+    "message": "No se pudo eliminar el texto resaltado"
+  },
+  "highlightNotePlaceholder": {
+    "message": "Añadir una nota (opcional)"
+  },
+  "highlightColor": {
+    "message": "Color del resaltado"
+  },
+  "highlightCustomColor": {
+    "message": "Elegir un color personalizado"
+  },
   "highlightTooLong": {
     "message": "La selección es demasiado larga. Selecciona un fragmento más corto."
   },
-  "highlightAriaLabel": { "message": "Texto resaltado guardado. Abrir anotación." },
-  "highlightTimelineAriaLabel": { "message": "Abrir texto resaltado guardado" },
-  "savedLibraryAll": { "message": "Todo" },
-  "savedLibraryStars": { "message": "Destacados" },
-  "savedLibraryHighlights": { "message": "Resaltados" },
-  "savedLibraryEmpty": { "message": "Aún no hay elementos guardados" },
-  "savedLibraryNoHighlights": { "message": "Aún no hay textos resaltados" },
-  "savedLibrarySearchPlaceholder": { "message": "Buscar destacados y resaltados" },
-  "highlightImportSuccess": { "message": "Se importaron {count} resaltado(s)" },
-  "highlightCloudSync": { "message": "Sincronizar resaltados" },
+  "highlightAriaLabel": {
+    "message": "Texto resaltado guardado. Abrir anotación."
+  },
+  "highlightTimelineAriaLabel": {
+    "message": "Abrir texto resaltado guardado"
+  },
+  "savedLibraryAll": {
+    "message": "Todo"
+  },
+  "savedLibraryStars": {
+    "message": "Destacados"
+  },
+  "savedLibraryHighlights": {
+    "message": "Resaltados"
+  },
+  "savedLibraryEmpty": {
+    "message": "Aún no hay elementos guardados"
+  },
+  "savedLibraryNoHighlights": {
+    "message": "Aún no hay textos resaltados"
+  },
+  "savedLibrarySearchPlaceholder": {
+    "message": "Buscar destacados y resaltados"
+  },
+  "highlightImportSuccess": {
+    "message": "Se importaron {count} resaltado(s)"
+  },
+  "highlightCloudSync": {
+    "message": "Sincronizar resaltados"
+  },
   "highlightCloudSyncHint": {
     "message": "Guarda los resaltados en un archivo de Drive separado por cuenta. Se incluyen de forma predeterminada al activar la sincronización y siempre se combinan de forma segura."
   },
-  "diagnosticsTitle": { "message": "Diagnóstico del problema" },
+  "diagnosticsTitle": {
+    "message": "Diagnóstico del problema"
+  },
   "diagnosticsHint": {
     "message": "Previsualiza el entorno y los ajustes de plugins anonimizados para informar de un problema."
   },
-  "diagnosticsPreview": { "message": "Vista previa" },
-  "diagnosticsPreviewTitle": { "message": "Vista previa del diagnóstico" },
+  "diagnosticsPreview": {
+    "message": "Vista previa"
+  },
+  "diagnosticsPreviewTitle": {
+    "message": "Vista previa del diagnóstico"
+  },
   "diagnosticsPrivacyNote": {
     "message": "Revísalo antes de compartir. No incluye prompts, conversaciones, cuentas, credenciales ni URL privadas."
   },
-  "diagnosticsClose": { "message": "Cerrar" },
-  "diagnosticsCopyMarkdown": { "message": "Copiar Markdown" },
-  "diagnosticsCopying": { "message": "Copiando…" },
-  "diagnosticsCopied": { "message": "Copiado" },
+  "diagnosticsClose": {
+    "message": "Cerrar"
+  },
+  "diagnosticsCopyMarkdown": {
+    "message": "Copiar Markdown"
+  },
+  "diagnosticsCopying": {
+    "message": "Copiando…"
+  },
+  "diagnosticsCopied": {
+    "message": "Copiado"
+  },
   "diagnosticsCopyFailed": {
     "message": "El portapapeles no está disponible. Selecciona la vista previa o descarga el JSON."
   },
-  "diagnosticsDownloadJson": { "message": "Descargar JSON" },
+  "diagnosticsDownloadJson": {
+    "message": "Descargar JSON"
+  },
   "promptHistoryTitle": {
     "message": "Historial de indicaciones",
     "description": "Prompt History panel text (#923)"

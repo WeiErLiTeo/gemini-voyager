@@ -151,6 +151,22 @@
     "message": "Вставлено",
     "description": "Prompt inserted into the chat input"
   },
+  "pm_fill_title": {
+    "message": "Заполните переменные",
+    "description": "Accessible name of the template variable fill surface"
+  },
+  "pm_fill_insert": {
+    "message": "Вставить",
+    "description": "Insert the prompt with the entered variable values"
+  },
+  "pm_fill_keep_raw": {
+    "message": "Оставить как есть",
+    "description": "Insert the prompt body with its placeholders untouched"
+  },
+  "pm_convert_braces": {
+    "message": "Преобразовать {name} в {{name}}",
+    "description": "Action that rewrites single-brace placeholders as template variables"
+  },
   "pm_delete": {
     "message": "Удалить",
     "description": "Delete prompt"
@@ -379,8 +395,14 @@
     "message": "Приоритет",
     "description": "Разговоры, активные за последние три часа"
   },
-  "folder_activity_today": { "message": "Сегодня", "description": "Активные сегодня разговоры" },
-  "folder_activity_yesterday": { "message": "Вчера", "description": "Активные вчера разговоры" },
+  "folder_activity_today": {
+    "message": "Сегодня",
+    "description": "Активные сегодня разговоры"
+  },
+  "folder_activity_yesterday": {
+    "message": "Вчера",
+    "description": "Активные вчера разговоры"
+  },
   "folder_activity_empty": {
     "message": "В папках пока нет разговоров",
     "description": "Пустое состояние активности"
@@ -1249,10 +1271,18 @@
     "message": "Синхронизация данных Voyager через ваше личное хранилище iCloud",
     "description": "iCloud sync description"
   },
-  "syncProvider": { "message": "Сервис хранения" },
-  "syncProviderGoogleDrive": { "message": "Google Drive" },
-  "syncProviderICloud": { "message": "iCloud" },
-  "syncConnectGoogleDrive": { "message": "Подключить Google Диск" },
+  "syncProvider": {
+    "message": "Сервис хранения"
+  },
+  "syncProviderGoogleDrive": {
+    "message": "Google Drive"
+  },
+  "syncProviderICloud": {
+    "message": "iCloud"
+  },
+  "syncConnectGoogleDrive": {
+    "message": "Подключить Google Диск"
+  },
   "syncModeDisabled": {
     "message": "Отключено",
     "description": "Sync mode disabled option"
@@ -1337,15 +1367,21 @@
     "message": "Перезаписать локальные данные облачной копией? Локальные изменения, которые не были загружены, будут потеряны.",
     "description": "Confirmation before overwriting local sync data"
   },
-  "syncDeleteICloudBackup": { "message": "Удалить резервную копию iCloud" },
+  "syncDeleteICloudBackup": {
+    "message": "Удалить резервную копию iCloud"
+  },
   "syncDeleteICloudConfirm": {
     "message": "Удалить все резервные копии Voyager из iCloud? Локальные данные останутся на этом Mac. Это действие нельзя отменить."
   },
-  "syncDeletingICloudBackup": { "message": "Удаление резервной копии iCloud…" },
+  "syncDeletingICloudBackup": {
+    "message": "Удаление резервной копии iCloud…"
+  },
   "syncDeleteICloudSuccess": {
     "message": "✓ Удалено файлов iCloud: {count}; локальные данные не изменены"
   },
-  "syncDeleteICloudFailed": { "message": "✗ Не удалось удалить резервную копию iCloud: {error}" },
+  "syncDeleteICloudFailed": {
+    "message": "✗ Не удалось удалить резервную копию iCloud: {error}"
+  },
   "syncMode": {
     "message": "Режим синхронизации",
     "description": "Sync mode label"
@@ -1662,7 +1698,6 @@
     "message": "Нажмите ESC для закрытия",
     "description": "Fullscreen overlay usage hint"
   },
-
   "enableHighlights": {
     "message": "Включить выделения",
     "description": "Highlight feature toggle label"
@@ -2663,26 +2698,54 @@
     "message": "Используйте сохранённые промпты на этом сайте. Потребуется разрешение на доступ.",
     "description": "Top toggle hint for enabling Prompt Manager on a third-party site"
   },
-  "storageQuotaTitle": { "message": "Хранилище" },
-  "storageQuotaManage": { "message": "Управление хранилищем" },
-  "storageQuotaLocal": { "message": "Локальные данные расширения" },
-  "storageQuotaSync": { "message": "Синхронизированные настройки" },
-  "storageQuotaHealthy": { "message": "Места достаточно" },
-  "storageQuotaAttention": { "message": "Близко к пределу" },
-  "storageQuotaCritical": { "message": "Почти заполнено" },
+  "storageQuotaTitle": {
+    "message": "Хранилище"
+  },
+  "storageQuotaManage": {
+    "message": "Управление хранилищем"
+  },
+  "storageQuotaLocal": {
+    "message": "Локальные данные расширения"
+  },
+  "storageQuotaSync": {
+    "message": "Синхронизированные настройки"
+  },
+  "storageQuotaHealthy": {
+    "message": "Места достаточно"
+  },
+  "storageQuotaAttention": {
+    "message": "Близко к пределу"
+  },
+  "storageQuotaCritical": {
+    "message": "Почти заполнено"
+  },
   "storageQuotaWarningToast": {
     "message": "Хранилище Voyager заполнено на {percent} %. Откройте окно расширения, чтобы проверить или очистить данные."
   },
-  "storageQuotaUnknown": { "message": "Данные об использовании недоступны" },
-  "storageQuotaBreakdown": { "message": "Состав хранилища" },
-  "storageQuotaSoftLimit": { "message": "Мягкий лимит Voyager" },
+  "storageQuotaUnknown": {
+    "message": "Данные об использовании недоступны"
+  },
+  "storageQuotaBreakdown": {
+    "message": "Состав хранилища"
+  },
+  "storageQuotaSoftLimit": {
+    "message": "Мягкий лимит Voyager"
+  },
   "storageQuotaEffectiveLimit": {
     "message": "Текущий действующий лимит: {size}. Voyager применяет меньшее из этого значения и выбранного мягкого лимита."
   },
-  "storageQuotaCache": { "message": "Восстанавливаемый кэш" },
-  "storageQuotaHighlights": { "message": "Выделения" },
-  "storageQuotaOther": { "message": "Прочее" },
-  "storageQuotaUnlock": { "message": "Расширить локальное хранилище" },
+  "storageQuotaCache": {
+    "message": "Восстанавливаемый кэш"
+  },
+  "storageQuotaHighlights": {
+    "message": "Выделения"
+  },
+  "storageQuotaOther": {
+    "message": "Прочее"
+  },
+  "storageQuotaUnlock": {
+    "message": "Расширить локальное хранилище"
+  },
   "storageQuotaSafariLimit": {
     "message": "Safari 15 может увеличить локальное хранилище лишь примерно с 5 до 10 МБ. Оно всё равно может заполниться."
   },
@@ -2698,44 +2761,96 @@
   "storageQuotaDraftClearConfirm": {
     "message": "Удалить все неотправленные черновики? Это действие нельзя отменить."
   },
-  "highlightAction": { "message": "Выделить" },
-  "highlightSaved": { "message": "Выделение сохранено" },
-  "highlightSaveFailed": { "message": "Не удалось сохранить выделение" },
-  "highlightDeleteFailed": { "message": "Не удалось удалить выделение" },
-  "highlightNotePlaceholder": { "message": "Добавить заметку (необязательно)" },
-  "highlightColor": { "message": "Цвет выделения" },
-  "highlightCustomColor": { "message": "Выбрать свой цвет" },
-  "highlightTooLong": { "message": "Выбранный фрагмент слишком длинный. Выберите более короткий." },
-  "highlightAriaLabel": { "message": "Сохранённое выделение. Открыть аннотацию." },
-  "highlightTimelineAriaLabel": { "message": "Открыть сохранённое выделение" },
-  "savedLibraryAll": { "message": "Все" },
-  "savedLibraryStars": { "message": "Избранное" },
-  "savedLibraryHighlights": { "message": "Выделения" },
-  "savedLibraryEmpty": { "message": "Сохранённых элементов пока нет" },
-  "savedLibraryNoHighlights": { "message": "Выделений пока нет" },
-  "savedLibrarySearchPlaceholder": { "message": "Поиск по избранному и выделениям" },
-  "highlightImportSuccess": { "message": "Импортировано выделений: {count}" },
-  "highlightCloudSync": { "message": "Синхронизировать выделения" },
+  "highlightAction": {
+    "message": "Выделить"
+  },
+  "highlightSaved": {
+    "message": "Выделение сохранено"
+  },
+  "highlightSaveFailed": {
+    "message": "Не удалось сохранить выделение"
+  },
+  "highlightDeleteFailed": {
+    "message": "Не удалось удалить выделение"
+  },
+  "highlightNotePlaceholder": {
+    "message": "Добавить заметку (необязательно)"
+  },
+  "highlightColor": {
+    "message": "Цвет выделения"
+  },
+  "highlightCustomColor": {
+    "message": "Выбрать свой цвет"
+  },
+  "highlightTooLong": {
+    "message": "Выбранный фрагмент слишком длинный. Выберите более короткий."
+  },
+  "highlightAriaLabel": {
+    "message": "Сохранённое выделение. Открыть аннотацию."
+  },
+  "highlightTimelineAriaLabel": {
+    "message": "Открыть сохранённое выделение"
+  },
+  "savedLibraryAll": {
+    "message": "Все"
+  },
+  "savedLibraryStars": {
+    "message": "Избранное"
+  },
+  "savedLibraryHighlights": {
+    "message": "Выделения"
+  },
+  "savedLibraryEmpty": {
+    "message": "Сохранённых элементов пока нет"
+  },
+  "savedLibraryNoHighlights": {
+    "message": "Выделений пока нет"
+  },
+  "savedLibrarySearchPlaceholder": {
+    "message": "Поиск по избранному и выделениям"
+  },
+  "highlightImportSuccess": {
+    "message": "Импортировано выделений: {count}"
+  },
+  "highlightCloudSync": {
+    "message": "Синхронизировать выделения"
+  },
   "highlightCloudSyncHint": {
     "message": "Хранит выделения в отдельном файле Drive для каждой учётной записи. При включении синхронизации Drive они добавляются по умолчанию и всегда безопасно объединяются."
   },
-  "diagnosticsTitle": { "message": "Диагностика проблемы" },
+  "diagnosticsTitle": {
+    "message": "Диагностика проблемы"
+  },
   "diagnosticsHint": {
     "message": "Просмотрите обезличенные сведения о среде и настройках плагинов для отчёта об ошибке."
   },
-  "diagnosticsPreview": { "message": "Предпросмотр" },
-  "diagnosticsPreviewTitle": { "message": "Предпросмотр диагностики" },
+  "diagnosticsPreview": {
+    "message": "Предпросмотр"
+  },
+  "diagnosticsPreviewTitle": {
+    "message": "Предпросмотр диагностики"
+  },
   "diagnosticsPrivacyNote": {
     "message": "Проверьте перед отправкой. Промпты, переписки, аккаунты, учётные данные и частные URL исключены."
   },
-  "diagnosticsClose": { "message": "Закрыть" },
-  "diagnosticsCopyMarkdown": { "message": "Копировать Markdown" },
-  "diagnosticsCopying": { "message": "Копирование…" },
-  "diagnosticsCopied": { "message": "Скопировано" },
+  "diagnosticsClose": {
+    "message": "Закрыть"
+  },
+  "diagnosticsCopyMarkdown": {
+    "message": "Копировать Markdown"
+  },
+  "diagnosticsCopying": {
+    "message": "Копирование…"
+  },
+  "diagnosticsCopied": {
+    "message": "Скопировано"
+  },
   "diagnosticsCopyFailed": {
     "message": "Буфер обмена недоступен. Выделите текст вручную или скачайте JSON."
   },
-  "diagnosticsDownloadJson": { "message": "Скачать JSON" },
+  "diagnosticsDownloadJson": {
+    "message": "Скачать JSON"
+  },
   "promptHistoryTitle": {
     "message": "История запросов",
     "description": "Prompt History panel text (#923)"

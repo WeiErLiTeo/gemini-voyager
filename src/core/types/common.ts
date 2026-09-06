@@ -325,7 +325,7 @@ export const StorageKeys = {
   PLUGIN_UI_COLLAPSED: 'gvPluginUiCollapsed',
   // Per-site custom accent colour overrides (chrome.storage.sync, backed up).
   // Shape: Record<siteId, string> keyed by SiteAdapter id ('gemini' | 'claude'
-  // | 'chatgpt' | 'aistudio' | 'grok' | ...). A site WITH an entry uses that
+  // | 'chatgpt' | 'aistudio' | ...). A site WITH an entry uses that
   // colour for the whole Voyager UI on that site; a site WITHOUT an entry falls
   // back to its default (Gemini = Everforest sage; others = adapter brandColor).
   ACCENT_COLORS: 'gvAccentColors',

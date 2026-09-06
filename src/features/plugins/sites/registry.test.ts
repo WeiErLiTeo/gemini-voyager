@@ -29,7 +29,6 @@ describe('resolvePluginPlatformId', () => {
     expect(
       resolvePluginPlatformId('https://artifact-id.frame.claudeusercontent.com/_f/version/'),
     ).toBe('claude');
-    expect(resolvePluginPlatformId('https://grok.com/')).toBe('grok');
   });
 
   it('returns null for native Voyager sites (full feature set runs there)', () => {
@@ -43,5 +42,6 @@ describe('resolvePluginPlatformId', () => {
   it('returns null for sites Voyager ships no adapter for', () => {
     expect(resolvePluginPlatformId('https://example.com/')).toBeNull();
     expect(resolvePluginPlatformId('https://deepseek.com/')).toBeNull();
+    expect(resolvePluginPlatformId('https://grok.com/')).toBeNull();
   });
 });

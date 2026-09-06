@@ -2,7 +2,7 @@
 
 A self-contained subsystem that lets Voyager run **plugins** — units that inject
 styles / DOM changes into AI chat sites (Gemini, AI Studio, ChatGPT, Claude,
-Grok, …). Voyager's own features can migrate onto this over time; third parties
+…). Voyager's own features can migrate onto this over time; third parties
 can ship their own plugins against the same contract.
 
 ## Two design constraints that shaped everything

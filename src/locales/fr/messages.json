@@ -151,6 +151,22 @@
     "message": "Inséré",
     "description": "Prompt inserted into the chat input"
   },
+  "pm_fill_title": {
+    "message": "Renseigner les variables",
+    "description": "Accessible name of the template variable fill surface"
+  },
+  "pm_fill_insert": {
+    "message": "Insérer",
+    "description": "Insert the prompt with the entered variable values"
+  },
+  "pm_fill_keep_raw": {
+    "message": "Laisser tel quel",
+    "description": "Insert the prompt body with its placeholders untouched"
+  },
+  "pm_convert_braces": {
+    "message": "Convertir {name} en {{name}}",
+    "description": "Action that rewrites single-brace placeholders as template variables"
+  },
   "pm_delete": {
     "message": "Supprimer",
     "description": "Delete prompt"
@@ -383,7 +399,10 @@
     "message": "Aujourd’hui",
     "description": "Conversations actives aujourd’hui"
   },
-  "folder_activity_yesterday": { "message": "Hier", "description": "Conversations actives hier" },
+  "folder_activity_yesterday": {
+    "message": "Hier",
+    "description": "Conversations actives hier"
+  },
   "folder_activity_empty": {
     "message": "Aucune conversation dans les dossiers",
     "description": "État vide de la vue Activité"
@@ -1252,10 +1271,18 @@
     "message": "Synchronisez les données Voyager avec votre espace iCloud privé",
     "description": "iCloud sync description"
   },
-  "syncProvider": { "message": "Service de stockage" },
-  "syncProviderGoogleDrive": { "message": "Google Drive" },
-  "syncProviderICloud": { "message": "iCloud" },
-  "syncConnectGoogleDrive": { "message": "Connecter Google Drive" },
+  "syncProvider": {
+    "message": "Service de stockage"
+  },
+  "syncProviderGoogleDrive": {
+    "message": "Google Drive"
+  },
+  "syncProviderICloud": {
+    "message": "iCloud"
+  },
+  "syncConnectGoogleDrive": {
+    "message": "Connecter Google Drive"
+  },
   "syncModeDisabled": {
     "message": "Désactivé",
     "description": "Sync mode disabled option"
@@ -1340,11 +1367,15 @@
     "message": "Remplacer les données locales par la copie du cloud ? Les modifications locales non téléversées seront perdues.",
     "description": "Confirmation before overwriting local sync data"
   },
-  "syncDeleteICloudBackup": { "message": "Supprimer la sauvegarde iCloud" },
+  "syncDeleteICloudBackup": {
+    "message": "Supprimer la sauvegarde iCloud"
+  },
   "syncDeleteICloudConfirm": {
     "message": "Supprimer toutes les sauvegardes Voyager d’iCloud ? Les données locales resteront sur ce Mac. Cette action est irréversible."
   },
-  "syncDeletingICloudBackup": { "message": "Suppression de la sauvegarde iCloud…" },
+  "syncDeletingICloudBackup": {
+    "message": "Suppression de la sauvegarde iCloud…"
+  },
   "syncDeleteICloudSuccess": {
     "message": "✓ {count} fichiers de sauvegarde iCloud supprimés ; les données locales sont inchangées"
   },
@@ -1667,7 +1698,6 @@
     "message": "Appuyez sur ÉCHAP pour fermer",
     "description": "Fullscreen overlay usage hint"
   },
-
   "enableHighlights": {
     "message": "Activer les surlignages",
     "description": "Highlight feature toggle label"
@@ -2668,26 +2698,54 @@
     "message": "Utilisez vos prompts enregistrés sur ce site. Un accès vous sera demandé.",
     "description": "Top toggle hint for enabling Prompt Manager on a third-party site"
   },
-  "storageQuotaTitle": { "message": "Stockage" },
-  "storageQuotaManage": { "message": "Gérer le stockage" },
-  "storageQuotaLocal": { "message": "Données locales de l’extension" },
-  "storageQuotaSync": { "message": "Réglages synchronisés" },
-  "storageQuotaHealthy": { "message": "Espace suffisant" },
-  "storageQuotaAttention": { "message": "Proche de la limite" },
-  "storageQuotaCritical": { "message": "Presque plein" },
+  "storageQuotaTitle": {
+    "message": "Stockage"
+  },
+  "storageQuotaManage": {
+    "message": "Gérer le stockage"
+  },
+  "storageQuotaLocal": {
+    "message": "Données locales de l’extension"
+  },
+  "storageQuotaSync": {
+    "message": "Réglages synchronisés"
+  },
+  "storageQuotaHealthy": {
+    "message": "Espace suffisant"
+  },
+  "storageQuotaAttention": {
+    "message": "Proche de la limite"
+  },
+  "storageQuotaCritical": {
+    "message": "Presque plein"
+  },
   "storageQuotaWarningToast": {
     "message": "Le stockage de Voyager est utilisé à {percent} %. Ouvrez la fenêtre de l’extension pour le vérifier ou libérer de l’espace."
   },
-  "storageQuotaUnknown": { "message": "Utilisation indisponible" },
-  "storageQuotaBreakdown": { "message": "Répartition du stockage" },
-  "storageQuotaSoftLimit": { "message": "Limite souple de Voyager" },
+  "storageQuotaUnknown": {
+    "message": "Utilisation indisponible"
+  },
+  "storageQuotaBreakdown": {
+    "message": "Répartition du stockage"
+  },
+  "storageQuotaSoftLimit": {
+    "message": "Limite souple de Voyager"
+  },
   "storageQuotaEffectiveLimit": {
     "message": "Limite effective actuelle : {size}. Voyager applique la valeur la plus basse entre celle-ci et la limite souple choisie."
   },
-  "storageQuotaCache": { "message": "Cache recréable" },
-  "storageQuotaHighlights": { "message": "Surlignages" },
-  "storageQuotaOther": { "message": "Autres" },
-  "storageQuotaUnlock": { "message": "Étendre le stockage local" },
+  "storageQuotaCache": {
+    "message": "Cache recréable"
+  },
+  "storageQuotaHighlights": {
+    "message": "Surlignages"
+  },
+  "storageQuotaOther": {
+    "message": "Autres"
+  },
+  "storageQuotaUnlock": {
+    "message": "Étendre le stockage local"
+  },
   "storageQuotaSafariLimit": {
     "message": "Safari 15 ne peut augmenter le stockage local que d’environ 5 Mo à 10 Mo. Il peut toujours se remplir."
   },
@@ -2703,46 +2761,96 @@
   "storageQuotaDraftClearConfirm": {
     "message": "Supprimer tous les brouillons non envoyés ? Cette action est irréversible."
   },
-  "highlightAction": { "message": "Surligner" },
-  "highlightSaved": { "message": "Surlignage enregistré" },
-  "highlightSaveFailed": { "message": "Impossible d’enregistrer le surlignage" },
-  "highlightDeleteFailed": { "message": "Impossible de supprimer le surlignage" },
-  "highlightNotePlaceholder": { "message": "Ajouter une note (facultatif)" },
-  "highlightColor": { "message": "Couleur du surlignage" },
-  "highlightCustomColor": { "message": "Choisir une couleur personnalisée" },
+  "highlightAction": {
+    "message": "Surligner"
+  },
+  "highlightSaved": {
+    "message": "Surlignage enregistré"
+  },
+  "highlightSaveFailed": {
+    "message": "Impossible d’enregistrer le surlignage"
+  },
+  "highlightDeleteFailed": {
+    "message": "Impossible de supprimer le surlignage"
+  },
+  "highlightNotePlaceholder": {
+    "message": "Ajouter une note (facultatif)"
+  },
+  "highlightColor": {
+    "message": "Couleur du surlignage"
+  },
+  "highlightCustomColor": {
+    "message": "Choisir une couleur personnalisée"
+  },
   "highlightTooLong": {
     "message": "La sélection est trop longue. Sélectionnez un passage plus court."
   },
-  "highlightAriaLabel": { "message": "Surlignage enregistré. Ouvrir l’annotation." },
-  "highlightTimelineAriaLabel": { "message": "Ouvrir le surlignage enregistré" },
-  "savedLibraryAll": { "message": "Tout" },
-  "savedLibraryStars": { "message": "Favoris" },
-  "savedLibraryHighlights": { "message": "Surlignages" },
-  "savedLibraryEmpty": { "message": "Aucun élément enregistré" },
-  "savedLibraryNoHighlights": { "message": "Aucun surlignage" },
-  "savedLibrarySearchPlaceholder": { "message": "Rechercher favoris et surlignages" },
-  "highlightImportSuccess": { "message": "{count} surlignage(s) importé(s)" },
-  "highlightCloudSync": { "message": "Synchroniser les surlignages" },
+  "highlightAriaLabel": {
+    "message": "Surlignage enregistré. Ouvrir l’annotation."
+  },
+  "highlightTimelineAriaLabel": {
+    "message": "Ouvrir le surlignage enregistré"
+  },
+  "savedLibraryAll": {
+    "message": "Tout"
+  },
+  "savedLibraryStars": {
+    "message": "Favoris"
+  },
+  "savedLibraryHighlights": {
+    "message": "Surlignages"
+  },
+  "savedLibraryEmpty": {
+    "message": "Aucun élément enregistré"
+  },
+  "savedLibraryNoHighlights": {
+    "message": "Aucun surlignage"
+  },
+  "savedLibrarySearchPlaceholder": {
+    "message": "Rechercher favoris et surlignages"
+  },
+  "highlightImportSuccess": {
+    "message": "{count} surlignage(s) importé(s)"
+  },
+  "highlightCloudSync": {
+    "message": "Synchroniser les surlignages"
+  },
   "highlightCloudSyncHint": {
     "message": "Conserve les surlignages dans un fichier Drive distinct par compte. Ils sont inclus par défaut lorsque la synchronisation Drive est activée et sont toujours fusionnés en toute sécurité."
   },
-  "diagnosticsTitle": { "message": "Diagnostic du problème" },
+  "diagnosticsTitle": {
+    "message": "Diagnostic du problème"
+  },
   "diagnosticsHint": {
     "message": "Prévisualisez l’environnement et les réglages de plugins anonymisés pour un signalement."
   },
-  "diagnosticsPreview": { "message": "Prévisualiser" },
-  "diagnosticsPreviewTitle": { "message": "Aperçu du diagnostic" },
+  "diagnosticsPreview": {
+    "message": "Prévisualiser"
+  },
+  "diagnosticsPreviewTitle": {
+    "message": "Aperçu du diagnostic"
+  },
   "diagnosticsPrivacyNote": {
     "message": "Vérifiez avant de partager. Les prompts, conversations, comptes, identifiants et URL privées sont exclus."
   },
-  "diagnosticsClose": { "message": "Fermer" },
-  "diagnosticsCopyMarkdown": { "message": "Copier le Markdown" },
-  "diagnosticsCopying": { "message": "Copie…" },
-  "diagnosticsCopied": { "message": "Copié" },
+  "diagnosticsClose": {
+    "message": "Fermer"
+  },
+  "diagnosticsCopyMarkdown": {
+    "message": "Copier le Markdown"
+  },
+  "diagnosticsCopying": {
+    "message": "Copie…"
+  },
+  "diagnosticsCopied": {
+    "message": "Copié"
+  },
   "diagnosticsCopyFailed": {
     "message": "Presse-papiers indisponible. Sélectionnez l’aperçu manuellement ou téléchargez le JSON."
   },
-  "diagnosticsDownloadJson": { "message": "Télécharger le JSON" },
+  "diagnosticsDownloadJson": {
+    "message": "Télécharger le JSON"
+  },
   "promptHistoryTitle": {
     "message": "Historique des invites",
     "description": "Prompt History panel text (#923)"

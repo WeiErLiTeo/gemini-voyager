@@ -151,14 +151,19 @@ export class FolderManager {
       this.navigation.highlightActiveConversation();
       this.navigation.bind();
     },
-    onPanelUnmount: () => {
+    onPanelUnmount: (reason) => {
       this.selection.unmount();
       this.treeView.unmount();
       this.navigation.unbind();
       this.feedback.hideTooltip();
       this.headerMenus.close();
       this.transfer.closeImportDialog();
-      this.dialogs.closeAll();
+      // A remount rebuilds the panel under the user; the folder instructions
+      // editor and the move-to-folder picker are body-level and hold unsaved
+      // input, so they stay. Everything else is anchored to a sidebar row that
+      // no longer exists and would be stranded at stale coordinates.
+      if (reason === 'stop') this.dialogs.closeAll();
+      else this.dialogs.closeTransient();
     },
     nativeSidebar: this.nativeSidebarObserver,
     nativeMenus: this.nativeConversationMenus,

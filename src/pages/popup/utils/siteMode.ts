@@ -16,7 +16,7 @@ function isHttpPageUrl(url: string): boolean {
 /**
  * Popup mode should show the full settings surface only on Voyager's native
  * sites. Any other normal web page is plugin-only, even before marketplace
- * manifests load, so Claude/ChatGPT/Grok and arbitrary third-party sites never
+ * manifests load, so Claude/ChatGPT and arbitrary third-party sites never
  * fall back to Gemini's full settings surface.
  */
 export function isPluginPopupSite(

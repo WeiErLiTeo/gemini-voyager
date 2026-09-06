@@ -151,6 +151,22 @@
     "message": "تم الإدراج",
     "description": "Prompt inserted into the chat input"
   },
+  "pm_fill_title": {
+    "message": "املأ المتغيرات",
+    "description": "Accessible name of the template variable fill surface"
+  },
+  "pm_fill_insert": {
+    "message": "إدراج",
+    "description": "Insert the prompt with the entered variable values"
+  },
+  "pm_fill_keep_raw": {
+    "message": "اتركه كما هو",
+    "description": "Insert the prompt body with its placeholders untouched"
+  },
+  "pm_convert_braces": {
+    "message": "حوّل {name} إلى {{name}}",
+    "description": "Action that rewrites single-brace placeholders as template variables"
+  },
   "pm_delete": {
     "message": "حذف",
     "description": "Delete prompt"
@@ -367,14 +383,26 @@
     "message": "المجلدات",
     "description": "Folder section title"
   },
-  "folder_activity_turn_on": { "message": "تشغيل عرض النشاط", "description": "تشغيل عرض النشاط" },
-  "folder_activity_turn_off": { "message": "إيقاف عرض النشاط", "description": "إيقاف عرض النشاط" },
+  "folder_activity_turn_on": {
+    "message": "تشغيل عرض النشاط",
+    "description": "تشغيل عرض النشاط"
+  },
+  "folder_activity_turn_off": {
+    "message": "إيقاف عرض النشاط",
+    "description": "إيقاف عرض النشاط"
+  },
   "folder_activity_priority": {
     "message": "الأولوية",
     "description": "المحادثات النشطة خلال الساعات الثلاث الماضية"
   },
-  "folder_activity_today": { "message": "اليوم", "description": "المحادثات النشطة اليوم" },
-  "folder_activity_yesterday": { "message": "أمس", "description": "المحادثات النشطة أمس" },
+  "folder_activity_today": {
+    "message": "اليوم",
+    "description": "المحادثات النشطة اليوم"
+  },
+  "folder_activity_yesterday": {
+    "message": "أمس",
+    "description": "المحادثات النشطة أمس"
+  },
   "folder_activity_empty": {
     "message": "لا توجد محادثات في المجلدات بعد",
     "description": "حالة عرض النشاط الفارغة"
@@ -1243,10 +1271,18 @@
     "message": "مزامنة بيانات Voyager عبر مساحة iCloud الخاصة بك",
     "description": "iCloud sync description"
   },
-  "syncProvider": { "message": "خدمة التخزين" },
-  "syncProviderGoogleDrive": { "message": "Google Drive" },
-  "syncProviderICloud": { "message": "iCloud" },
-  "syncConnectGoogleDrive": { "message": "ربط Google Drive" },
+  "syncProvider": {
+    "message": "خدمة التخزين"
+  },
+  "syncProviderGoogleDrive": {
+    "message": "Google Drive"
+  },
+  "syncProviderICloud": {
+    "message": "iCloud"
+  },
+  "syncConnectGoogleDrive": {
+    "message": "ربط Google Drive"
+  },
   "syncModeDisabled": {
     "message": "معطل",
     "description": "Sync mode disabled option"
@@ -1331,15 +1367,21 @@
     "message": "هل تريد استبدال البيانات المحلية بنسخة السحابة؟ ستُفقد التغييرات المحلية التي لم يتم رفعها.",
     "description": "Confirmation before overwriting local sync data"
   },
-  "syncDeleteICloudBackup": { "message": "حذف نسخة iCloud الاحتياطية" },
+  "syncDeleteICloudBackup": {
+    "message": "حذف نسخة iCloud الاحتياطية"
+  },
   "syncDeleteICloudConfirm": {
     "message": "هل تريد حذف جميع نسخ Voyager الاحتياطية من iCloud؟ ستبقى البيانات المحلية على هذا الـ Mac. لا يمكن التراجع عن هذا الإجراء."
   },
-  "syncDeletingICloudBackup": { "message": "جارٍ حذف نسخة iCloud الاحتياطية…" },
+  "syncDeletingICloudBackup": {
+    "message": "جارٍ حذف نسخة iCloud الاحتياطية…"
+  },
   "syncDeleteICloudSuccess": {
     "message": "✓ تم حذف {count} من ملفات iCloud الاحتياطية؛ لم تتغير البيانات المحلية"
   },
-  "syncDeleteICloudFailed": { "message": "✗ تعذر حذف نسخة iCloud الاحتياطية: {error}" },
+  "syncDeleteICloudFailed": {
+    "message": "✗ تعذر حذف نسخة iCloud الاحتياطية: {error}"
+  },
   "syncMode": {
     "message": "وضع المزامنة",
     "description": "Sync mode label"
@@ -1656,7 +1698,6 @@
     "message": "اضغط ESC للإغلاق",
     "description": "Fullscreen overlay usage hint"
   },
-
   "enableHighlights": {
     "message": "تمكين التمييز",
     "description": "Highlight feature toggle label"
@@ -2657,26 +2698,54 @@
     "message": "استخدم موجّهاتك المحفوظة على هذا الموقع. سيُطلب منك منح الإذن بالوصول.",
     "description": "Top toggle hint for enabling Prompt Manager on a third-party site"
   },
-  "storageQuotaTitle": { "message": "مساحة التخزين" },
-  "storageQuotaManage": { "message": "إدارة التخزين" },
-  "storageQuotaLocal": { "message": "بيانات الإضافة المحلية" },
-  "storageQuotaSync": { "message": "الإعدادات المتزامنة" },
-  "storageQuotaHealthy": { "message": "مساحة كافية" },
-  "storageQuotaAttention": { "message": "قريب من الحد" },
-  "storageQuotaCritical": { "message": "ممتلئ تقريبًا" },
+  "storageQuotaTitle": {
+    "message": "مساحة التخزين"
+  },
+  "storageQuotaManage": {
+    "message": "إدارة التخزين"
+  },
+  "storageQuotaLocal": {
+    "message": "بيانات الإضافة المحلية"
+  },
+  "storageQuotaSync": {
+    "message": "الإعدادات المتزامنة"
+  },
+  "storageQuotaHealthy": {
+    "message": "مساحة كافية"
+  },
+  "storageQuotaAttention": {
+    "message": "قريب من الحد"
+  },
+  "storageQuotaCritical": {
+    "message": "ممتلئ تقريبًا"
+  },
   "storageQuotaWarningToast": {
     "message": "تم استخدام {percent}% من مساحة تخزين Voyager. افتح نافذة الإضافة لمراجعة البيانات أو تنظيفها."
   },
-  "storageQuotaUnknown": { "message": "تعذّر قراءة الاستخدام" },
-  "storageQuotaBreakdown": { "message": "تفاصيل التخزين" },
-  "storageQuotaSoftLimit": { "message": "الحد المرن لـ Voyager" },
+  "storageQuotaUnknown": {
+    "message": "تعذّر قراءة الاستخدام"
+  },
+  "storageQuotaBreakdown": {
+    "message": "تفاصيل التخزين"
+  },
+  "storageQuotaSoftLimit": {
+    "message": "الحد المرن لـ Voyager"
+  },
   "storageQuotaEffectiveLimit": {
     "message": "الحد الفعلي الحالي: {size}. يطبق Voyager القيمة الأقل بينه وبين الحد المرن المحدد."
   },
-  "storageQuotaCache": { "message": "ذاكرة مؤقتة قابلة لإعادة الإنشاء" },
-  "storageQuotaHighlights": { "message": "النصوص المميزة" },
-  "storageQuotaOther": { "message": "أخرى" },
-  "storageQuotaUnlock": { "message": "توسيع التخزين المحلي" },
+  "storageQuotaCache": {
+    "message": "ذاكرة مؤقتة قابلة لإعادة الإنشاء"
+  },
+  "storageQuotaHighlights": {
+    "message": "النصوص المميزة"
+  },
+  "storageQuotaOther": {
+    "message": "أخرى"
+  },
+  "storageQuotaUnlock": {
+    "message": "توسيع التخزين المحلي"
+  },
   "storageQuotaSafariLimit": {
     "message": "يستطيع Safari 15 رفع التخزين المحلي من نحو 5 ميجابايت إلى نحو 10 ميجابايت فقط، وقد يمتلئ مع ذلك."
   },
@@ -2692,44 +2761,96 @@
   "storageQuotaDraftClearConfirm": {
     "message": "هل تريد حذف كل المسودات غير المرسلة؟ لا يمكن التراجع عن هذا الإجراء."
   },
-  "highlightAction": { "message": "تمييز" },
-  "highlightSaved": { "message": "تم حفظ التمييز" },
-  "highlightSaveFailed": { "message": "تعذر حفظ التمييز" },
-  "highlightDeleteFailed": { "message": "تعذر حذف التمييز" },
-  "highlightNotePlaceholder": { "message": "إضافة ملاحظة (اختياري)" },
-  "highlightColor": { "message": "لون التمييز" },
-  "highlightCustomColor": { "message": "اختيار لون مخصص" },
-  "highlightTooLong": { "message": "التحديد طويل جدًا. حدد مقطعًا أقصر." },
-  "highlightAriaLabel": { "message": "تمييز محفوظ. فتح التعليق التوضيحي." },
-  "highlightTimelineAriaLabel": { "message": "فتح التمييز المحفوظ" },
-  "savedLibraryAll": { "message": "الكل" },
-  "savedLibraryStars": { "message": "المفضلة" },
-  "savedLibraryHighlights": { "message": "التمييزات" },
-  "savedLibraryEmpty": { "message": "لا توجد عناصر محفوظة بعد" },
-  "savedLibraryNoHighlights": { "message": "لا توجد تمييزات بعد" },
-  "savedLibrarySearchPlaceholder": { "message": "البحث في المفضلة والتمييزات" },
-  "highlightImportSuccess": { "message": "تم استيراد {count} من التمييزات" },
-  "highlightCloudSync": { "message": "مزامنة التمييزات" },
+  "highlightAction": {
+    "message": "تمييز"
+  },
+  "highlightSaved": {
+    "message": "تم حفظ التمييز"
+  },
+  "highlightSaveFailed": {
+    "message": "تعذر حفظ التمييز"
+  },
+  "highlightDeleteFailed": {
+    "message": "تعذر حذف التمييز"
+  },
+  "highlightNotePlaceholder": {
+    "message": "إضافة ملاحظة (اختياري)"
+  },
+  "highlightColor": {
+    "message": "لون التمييز"
+  },
+  "highlightCustomColor": {
+    "message": "اختيار لون مخصص"
+  },
+  "highlightTooLong": {
+    "message": "التحديد طويل جدًا. حدد مقطعًا أقصر."
+  },
+  "highlightAriaLabel": {
+    "message": "تمييز محفوظ. فتح التعليق التوضيحي."
+  },
+  "highlightTimelineAriaLabel": {
+    "message": "فتح التمييز المحفوظ"
+  },
+  "savedLibraryAll": {
+    "message": "الكل"
+  },
+  "savedLibraryStars": {
+    "message": "المفضلة"
+  },
+  "savedLibraryHighlights": {
+    "message": "التمييزات"
+  },
+  "savedLibraryEmpty": {
+    "message": "لا توجد عناصر محفوظة بعد"
+  },
+  "savedLibraryNoHighlights": {
+    "message": "لا توجد تمييزات بعد"
+  },
+  "savedLibrarySearchPlaceholder": {
+    "message": "البحث في المفضلة والتمييزات"
+  },
+  "highlightImportSuccess": {
+    "message": "تم استيراد {count} من التمييزات"
+  },
+  "highlightCloudSync": {
+    "message": "مزامنة التمييزات"
+  },
   "highlightCloudSyncHint": {
     "message": "يحفظ التمييزات في ملف Drive منفصل لكل حساب. تُضمّن افتراضيًا عند تشغيل مزامنة Drive وتُدمج دائمًا بأمان."
   },
-  "diagnosticsTitle": { "message": "تشخيص المشكلة" },
+  "diagnosticsTitle": {
+    "message": "تشخيص المشكلة"
+  },
   "diagnosticsHint": {
     "message": "عاين معلومات البيئة وإعدادات الإضافات المنقّحة لإرفاقها بتقرير المشكلة."
   },
-  "diagnosticsPreview": { "message": "معاينة" },
-  "diagnosticsPreviewTitle": { "message": "معاينة معلومات التشخيص" },
+  "diagnosticsPreview": {
+    "message": "معاينة"
+  },
+  "diagnosticsPreviewTitle": {
+    "message": "معاينة معلومات التشخيص"
+  },
   "diagnosticsPrivacyNote": {
     "message": "راجعها قبل المشاركة. لا تتضمن المطالبات أو المحادثات أو الحسابات أو بيانات الاعتماد أو الروابط الخاصة."
   },
-  "diagnosticsClose": { "message": "إغلاق" },
-  "diagnosticsCopyMarkdown": { "message": "نسخ Markdown" },
-  "diagnosticsCopying": { "message": "جارٍ النسخ…" },
-  "diagnosticsCopied": { "message": "تم النسخ" },
+  "diagnosticsClose": {
+    "message": "إغلاق"
+  },
+  "diagnosticsCopyMarkdown": {
+    "message": "نسخ Markdown"
+  },
+  "diagnosticsCopying": {
+    "message": "جارٍ النسخ…"
+  },
+  "diagnosticsCopied": {
+    "message": "تم النسخ"
+  },
   "diagnosticsCopyFailed": {
     "message": "الحافظة غير متاحة. حدّد نص المعاينة يدويًا أو نزّل ملف JSON."
   },
-  "diagnosticsDownloadJson": { "message": "تنزيل JSON" },
+  "diagnosticsDownloadJson": {
+    "message": "تنزيل JSON"
+  },
   "promptHistoryTitle": {
     "message": "سجل المطالبات",
     "description": "Prompt History panel text (#923)"

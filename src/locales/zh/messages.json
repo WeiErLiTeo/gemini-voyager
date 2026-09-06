@@ -151,6 +151,22 @@
     "message": "已插入",
     "description": "提示词已插入输入框"
   },
+  "pm_fill_title": {
+    "message": "填写变量",
+    "description": "Accessible name of the template variable fill surface"
+  },
+  "pm_fill_insert": {
+    "message": "插入",
+    "description": "Insert the prompt with the entered variable values"
+  },
+  "pm_fill_keep_raw": {
+    "message": "保持原样",
+    "description": "Insert the prompt body with its placeholders untouched"
+  },
+  "pm_convert_braces": {
+    "message": "把 {name} 转成 {{name}}",
+    "description": "Action that rewrites single-brace placeholders as template variables"
+  },
   "pm_delete": {
     "message": "删除",
     "description": "删除 prompt"
@@ -375,11 +391,26 @@
     "message": "关闭动态视图",
     "description": "关闭注意力优先的动态视图"
   },
-  "folder_activity_priority": { "message": "优先", "description": "最近三小时内活跃的对话" },
-  "folder_activity_today": { "message": "今天", "description": "今天有对话的分组" },
-  "folder_activity_yesterday": { "message": "昨天", "description": "昨天有对话的分组" },
-  "folder_activity_empty": { "message": "文件夹中还没有对话", "description": "动态视图空状态" },
-  "folder_activity_top_level": { "message": "顶层", "description": "未放入具名文件夹的对话" },
+  "folder_activity_priority": {
+    "message": "优先",
+    "description": "最近三小时内活跃的对话"
+  },
+  "folder_activity_today": {
+    "message": "今天",
+    "description": "今天有对话的分组"
+  },
+  "folder_activity_yesterday": {
+    "message": "昨天",
+    "description": "昨天有对话的分组"
+  },
+  "folder_activity_empty": {
+    "message": "文件夹中还没有对话",
+    "description": "动态视图空状态"
+  },
+  "folder_activity_top_level": {
+    "message": "顶层",
+    "description": "未放入具名文件夹的对话"
+  },
   "folder_create": {
     "message": "创建文件夹",
     "description": "创建文件夹按钮提示"
@@ -1232,10 +1263,18 @@
     "message": "通过你的私人 iCloud 空间同步 Voyager 数据",
     "description": "iCloud 同步描述"
   },
-  "syncProvider": { "message": "存储服务" },
-  "syncProviderGoogleDrive": { "message": "Google Drive" },
-  "syncProviderICloud": { "message": "iCloud" },
-  "syncConnectGoogleDrive": { "message": "连接 Google Drive" },
+  "syncProvider": {
+    "message": "存储服务"
+  },
+  "syncProviderGoogleDrive": {
+    "message": "Google Drive"
+  },
+  "syncProviderICloud": {
+    "message": "iCloud"
+  },
+  "syncConnectGoogleDrive": {
+    "message": "连接 Google Drive"
+  },
   "preventAutoScroll": {
     "message": "防自动跳转",
     "description": "功能选项：防止每次输入后生成答案时自动滚到底部"
@@ -1328,13 +1367,21 @@
     "message": "确定要用云端数据覆盖本地数据吗？未上传的本地更改会丢失。",
     "description": "覆盖本地同步数据前的确认"
   },
-  "syncDeleteICloudBackup": { "message": "删除 iCloud 备份" },
+  "syncDeleteICloudBackup": {
+    "message": "删除 iCloud 备份"
+  },
   "syncDeleteICloudConfirm": {
     "message": "删除 iCloud 中的所有 Voyager 备份？本机数据会保留，此操作无法撤销。"
   },
-  "syncDeletingICloudBackup": { "message": "正在删除 iCloud 备份…" },
-  "syncDeleteICloudSuccess": { "message": "✓ 已删除 {count} 个 iCloud 备份文件，本机数据未改变" },
-  "syncDeleteICloudFailed": { "message": "✗ 无法删除 iCloud 备份：{error}" },
+  "syncDeletingICloudBackup": {
+    "message": "正在删除 iCloud 备份…"
+  },
+  "syncDeleteICloudSuccess": {
+    "message": "✓ 已删除 {count} 个 iCloud 备份文件，本机数据未改变"
+  },
+  "syncDeleteICloudFailed": {
+    "message": "✗ 无法删除 iCloud 备份：{error}"
+  },
   "syncMode": {
     "message": "同步模式",
     "description": "同步模式标签"
@@ -1651,7 +1698,6 @@
     "message": "按 ESC 关闭",
     "description": "Fullscreen overlay usage hint"
   },
-
   "enableHighlights": {
     "message": "启用高亮",
     "description": "高亮功能开关标签"
@@ -2652,26 +2698,54 @@
     "message": "在此站点使用你保存的提示词。开启时需要授权访问该站点。",
     "description": "Top toggle hint for enabling Prompt Manager on a third-party site"
   },
-  "storageQuotaTitle": { "message": "存储空间" },
-  "storageQuotaManage": { "message": "管理存储" },
-  "storageQuotaLocal": { "message": "扩展本地数据" },
-  "storageQuotaSync": { "message": "同步设置" },
-  "storageQuotaHealthy": { "message": "空间充足" },
-  "storageQuotaAttention": { "message": "接近上限" },
-  "storageQuotaCritical": { "message": "即将存满" },
+  "storageQuotaTitle": {
+    "message": "存储空间"
+  },
+  "storageQuotaManage": {
+    "message": "管理存储"
+  },
+  "storageQuotaLocal": {
+    "message": "扩展本地数据"
+  },
+  "storageQuotaSync": {
+    "message": "同步设置"
+  },
+  "storageQuotaHealthy": {
+    "message": "空间充足"
+  },
+  "storageQuotaAttention": {
+    "message": "接近上限"
+  },
+  "storageQuotaCritical": {
+    "message": "即将存满"
+  },
   "storageQuotaWarningToast": {
     "message": "Voyager 存储空间已使用 {percent}%。请打开扩展弹窗查看或清理数据。"
   },
-  "storageQuotaUnknown": { "message": "无法读取用量" },
-  "storageQuotaBreakdown": { "message": "存储明细" },
-  "storageQuotaSoftLimit": { "message": "Voyager 软上限" },
+  "storageQuotaUnknown": {
+    "message": "无法读取用量"
+  },
+  "storageQuotaBreakdown": {
+    "message": "存储明细"
+  },
+  "storageQuotaSoftLimit": {
+    "message": "Voyager 软上限"
+  },
   "storageQuotaEffectiveLimit": {
     "message": "当前实际上限：{size}。Voyager 会以它和所选软上限中的较低值为准。"
   },
-  "storageQuotaCache": { "message": "可重建缓存" },
-  "storageQuotaHighlights": { "message": "高亮内容" },
-  "storageQuotaOther": { "message": "其他" },
-  "storageQuotaUnlock": { "message": "扩展本地空间" },
+  "storageQuotaCache": {
+    "message": "可重建缓存"
+  },
+  "storageQuotaHighlights": {
+    "message": "高亮内容"
+  },
+  "storageQuotaOther": {
+    "message": "其他"
+  },
+  "storageQuotaUnlock": {
+    "message": "扩展本地空间"
+  },
   "storageQuotaSafariLimit": {
     "message": "Safari 15 只能把本地存储从约 5 MB 提升到约 10 MB，仍然可能存满。"
   },
@@ -2687,44 +2761,96 @@
   "storageQuotaDraftClearConfirm": {
     "message": "删除所有未发送的草稿？此操作无法撤销。"
   },
-  "highlightAction": { "message": "高亮" },
-  "highlightSaved": { "message": "高亮已保存" },
-  "highlightSaveFailed": { "message": "无法保存高亮" },
-  "highlightDeleteFailed": { "message": "无法删除高亮" },
-  "highlightNotePlaceholder": { "message": "添加备注（可选）" },
-  "highlightColor": { "message": "高亮颜色" },
-  "highlightCustomColor": { "message": "自定义高亮颜色" },
-  "highlightTooLong": { "message": "选中内容过长，请缩小范围。" },
-  "highlightAriaLabel": { "message": "已保存的高亮。打开批注。" },
-  "highlightTimelineAriaLabel": { "message": "打开已保存的高亮" },
-  "savedLibraryAll": { "message": "全部" },
-  "savedLibraryStars": { "message": "星标" },
-  "savedLibraryHighlights": { "message": "高亮" },
-  "savedLibraryEmpty": { "message": "暂无收藏内容" },
-  "savedLibraryNoHighlights": { "message": "暂无高亮" },
-  "savedLibrarySearchPlaceholder": { "message": "搜索星标和高亮" },
-  "highlightImportSuccess": { "message": "已导入 {count} 条高亮" },
-  "highlightCloudSync": { "message": "同步高亮" },
+  "highlightAction": {
+    "message": "高亮"
+  },
+  "highlightSaved": {
+    "message": "高亮已保存"
+  },
+  "highlightSaveFailed": {
+    "message": "无法保存高亮"
+  },
+  "highlightDeleteFailed": {
+    "message": "无法删除高亮"
+  },
+  "highlightNotePlaceholder": {
+    "message": "添加备注（可选）"
+  },
+  "highlightColor": {
+    "message": "高亮颜色"
+  },
+  "highlightCustomColor": {
+    "message": "自定义高亮颜色"
+  },
+  "highlightTooLong": {
+    "message": "选中内容过长，请缩小范围。"
+  },
+  "highlightAriaLabel": {
+    "message": "已保存的高亮。打开批注。"
+  },
+  "highlightTimelineAriaLabel": {
+    "message": "打开已保存的高亮"
+  },
+  "savedLibraryAll": {
+    "message": "全部"
+  },
+  "savedLibraryStars": {
+    "message": "星标"
+  },
+  "savedLibraryHighlights": {
+    "message": "高亮"
+  },
+  "savedLibraryEmpty": {
+    "message": "暂无收藏内容"
+  },
+  "savedLibraryNoHighlights": {
+    "message": "暂无高亮"
+  },
+  "savedLibrarySearchPlaceholder": {
+    "message": "搜索星标和高亮"
+  },
+  "highlightImportSuccess": {
+    "message": "已导入 {count} 条高亮"
+  },
+  "highlightCloudSync": {
+    "message": "同步高亮"
+  },
   "highlightCloudSyncHint": {
     "message": "将高亮保存在按账号隔离的独立 Drive 文件中。开启 Drive 同步后默认包含高亮，并始终安全合并。"
   },
-  "diagnosticsTitle": { "message": "问题诊断" },
+  "diagnosticsTitle": {
+    "message": "问题诊断"
+  },
   "diagnosticsHint": {
     "message": "预览用于 Issue 反馈的脱敏环境与插件设置。"
   },
-  "diagnosticsPreview": { "message": "预览" },
-  "diagnosticsPreviewTitle": { "message": "诊断信息预览" },
+  "diagnosticsPreview": {
+    "message": "预览"
+  },
+  "diagnosticsPreviewTitle": {
+    "message": "诊断信息预览"
+  },
   "diagnosticsPrivacyNote": {
     "message": "分享前请先检查。不包含提示词、对话、账号、凭证和私有网址。"
   },
-  "diagnosticsClose": { "message": "关闭" },
-  "diagnosticsCopyMarkdown": { "message": "复制 Markdown" },
-  "diagnosticsCopying": { "message": "正在复制…" },
-  "diagnosticsCopied": { "message": "已复制" },
+  "diagnosticsClose": {
+    "message": "关闭"
+  },
+  "diagnosticsCopyMarkdown": {
+    "message": "复制 Markdown"
+  },
+  "diagnosticsCopying": {
+    "message": "正在复制…"
+  },
+  "diagnosticsCopied": {
+    "message": "已复制"
+  },
   "diagnosticsCopyFailed": {
     "message": "无法访问剪贴板，请手动选择预览内容或下载 JSON。"
   },
-  "diagnosticsDownloadJson": { "message": "下载 JSON" },
+  "diagnosticsDownloadJson": {
+    "message": "下载 JSON"
+  },
   "promptHistoryTitle": {
     "message": "提示词历史",
     "description": "Prompt History panel text (#923)"

@@ -2150,7 +2150,7 @@ body.dark-theme .gv-pm-lock.active {
 }
 
 .gv-pm-add:hover {
-  background: oklch(0.6 0.2 158);
+  background: var(--gv-pm-brand-hover);
   box-shadow: 0 6px 18px oklch(0.55 0.17 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.45);
   transform: translateY(-2px);
 }
@@ -2162,7 +2162,7 @@ body.dark-theme .gv-pm-lock.active {
 @media (prefers-color-scheme: dark) {
   .gv-pm-add {
     background: oklch(0.7 0.16 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)));
-    color: oklch(0.15 0.025 160);
+    color: var(--gv-pm-brand-fg, var(--gv-pm-brand-fg-default));
   }
 
   .gv-pm-add:hover {
@@ -2434,86 +2434,61 @@ body.dark-theme .gv-pm-tag.active {
 }
 
 .gv-pm-add-form {
-  padding: 10px 16px 14px 16px;
+  padding: 12px 16px 14px 16px;
   display: grid;
-  gap: 8px;
+  gap: 10px;
 }
 
-.gv-pm-input-text {
-  width: 100%;
-  resize: vertical;
-  min-height: 68px;
-  max-height: 200px;
-  border-radius: 10px;
-  background: rgba(31, 41, 55, 0.5);
-  color: #e5e7eb;
-  border: 1.5px solid rgba(255, 255, 255, 0.08);
-  padding: 9px 12px;
-  font-size: 13px;
-  line-height: 1.5;
-  outline: none;
-  transition:
-    border-color 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.gv-pm-input-text:focus {
-  border-color: oklch(0.55 0.17 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.5);
-  box-shadow: 0 0 0 3px oklch(0.55 0.17 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.1);
-}
-
+.gv-pm-input-text,
 .gv-pm-input-tags,
 .gv-pm-input-name {
   width: 100%;
   border-radius: 10px;
-  background: rgba(31, 41, 55, 0.5);
-  color: #e5e7eb;
-  border: 1.5px solid rgba(255, 255, 255, 0.08);
   padding: 9px 12px;
+  /* Form controls do not inherit type by default, so without this the fields
+     render in the browser's form font while the rest of the panel does not. */
+  font: inherit;
   font-size: 13px;
+  line-height: 1.5;
+  /* Inherit the panel foreground rather than restating a hex per theme. */
+  color: inherit;
+  background: oklch(0.14 0.004 285 / 0.03);
+  border: 1px solid oklch(0.92 0.004 250 / 0.9);
   outline: none;
   transition:
-    border-color 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease;
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
+.gv-pm-input-text {
+  resize: vertical;
+  min-height: 68px;
+  max-height: 200px;
+}
+
+.gv-pm-input-text::placeholder,
+.gv-pm-input-tags::placeholder,
+.gv-pm-input-name::placeholder {
+  color: currentcolor;
+  opacity: 0.45;
+}
+
+/* One focus treatment for every field, built from the accent token instead of
+   from its hue, so a custom brand colour keeps its own lightness and chroma. */
+.gv-pm-input-text:focus,
 .gv-pm-input-tags:focus,
 .gv-pm-input-name:focus {
-  border-color: oklch(0.55 0.17 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.5);
-  box-shadow: 0 0 0 3px oklch(0.55 0.17 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.1);
+  border-color: var(--gv-pm-brand, var(--gv-pm-brand-default));
+  box-shadow: 0 0 0 3px var(--gv-pm-brand-soft);
 }
 
-.theme-host.light-theme .gv-pm-input-text,
-.theme-host.light-theme .gv-pm-input-tags,
-.theme-host.light-theme .gv-pm-input-name,
-body.light-theme .gv-pm-input-text,
-body.light-theme .gv-pm-input-tags,
-body.light-theme .gv-pm-input-name {
-  background: rgba(0, 0, 0, 0.04);
-  color: #1f2937;
-  border: 1.5px solid rgba(0, 0, 0, 0.08);
-}
-
-.theme-host.light-theme .gv-pm-input-text:focus,
-.theme-host.light-theme .gv-pm-input-tags:focus,
-.theme-host.light-theme .gv-pm-input-name:focus,
-body.light-theme .gv-pm-input-text:focus,
-body.light-theme .gv-pm-input-tags:focus,
-body.light-theme .gv-pm-input-name:focus {
-  border-color: oklch(0.55 0.17 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.5);
-  box-shadow: 0 0 0 3px oklch(0.55 0.17 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.08);
-}
-
-.theme-host.light-theme .gv-pm-input-text::placeholder,
-.theme-host.light-theme .gv-pm-input-tags::placeholder,
-.theme-host.light-theme .gv-pm-input-name::placeholder,
-body.light-theme .gv-pm-input-text::placeholder,
-body.light-theme .gv-pm-input-tags::placeholder,
-body.light-theme .gv-pm-input-name::placeholder {
-  color: #6b7280;
-  opacity: 0.7;
+@media (prefers-color-scheme: dark) {
+  .gv-pm-input-text,
+  .gv-pm-input-tags,
+  .gv-pm-input-name {
+    background: oklch(0.92 0.004 250 / 0.04);
+    border-color: oklch(0.3 0.008 285 / 0.9);
+  }
 }
 
 .theme-host.dark-theme .gv-pm-input-text,
@@ -2522,35 +2497,26 @@ body.light-theme .gv-pm-input-name::placeholder {
 body.dark-theme .gv-pm-input-text,
 body.dark-theme .gv-pm-input-tags,
 body.dark-theme .gv-pm-input-name {
-  background: rgba(31, 41, 55, 0.5);
-  color: #e5e7eb;
-  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  background: oklch(0.92 0.004 250 / 0.04);
+  border-color: oklch(0.3 0.008 285 / 0.9);
 }
 
-.theme-host.dark-theme .gv-pm-input-text:focus,
-.theme-host.dark-theme .gv-pm-input-tags:focus,
-.theme-host.dark-theme .gv-pm-input-name:focus,
-body.dark-theme .gv-pm-input-text:focus,
-body.dark-theme .gv-pm-input-tags:focus,
-body.dark-theme .gv-pm-input-name:focus {
-  border-color: oklch(0.7 0.16 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.5);
-  box-shadow: 0 0 0 3px oklch(0.7 0.16 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.1);
-}
-
-.theme-host.dark-theme .gv-pm-input-text::placeholder,
-.theme-host.dark-theme .gv-pm-input-tags::placeholder,
-.theme-host.dark-theme .gv-pm-input-name::placeholder,
-body.dark-theme .gv-pm-input-text::placeholder,
-body.dark-theme .gv-pm-input-tags::placeholder,
-body.dark-theme .gv-pm-input-name::placeholder {
-  color: #9ca3af;
-  opacity: 0.7;
+.theme-host.light-theme .gv-pm-input-text,
+.theme-host.light-theme .gv-pm-input-tags,
+.theme-host.light-theme .gv-pm-input-name,
+body.light-theme .gv-pm-input-text,
+body.light-theme .gv-pm-input-tags,
+body.light-theme .gv-pm-input-name {
+  background: oklch(0.14 0.004 285 / 0.03);
+  border-color: oklch(0.92 0.004 250 / 0.9);
 }
 
 .gv-pm-add-actions {
   display: flex;
+  align-items: center;
   gap: 8px;
   justify-content: flex-end;
+  margin-top: 2px;
 }
 
 .gv-pm-inline-hint {
@@ -2564,80 +2530,75 @@ body.dark-theme .gv-pm-input-name::placeholder {
   color: #86efac;
 }
 
+.gv-pm-save,
+.gv-pm-cancel {
+  border-radius: 10px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+/* The accent comes straight from the brand token. The previous rule rebuilt the
+   colour out of --gv-pm-brand-h alone and then hardcoded hue 158 in :hover and
+   hue 160 in the dark foreground, so a user's custom accent snapped back to the
+   default green as soon as the pointer touched the button. */
 .gv-pm-save {
-  background: oklch(0.55 0.17 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)));
-  color: oklch(0.99 0.01 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)));
-  border-radius: 9px;
-  padding: 6px 12px;
-  font-weight: 700;
-  box-shadow: 0 2px 8px oklch(0.55 0.17 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.3);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--gv-pm-brand, var(--gv-pm-brand-default));
+  color: var(--gv-pm-brand-fg, var(--gv-pm-brand-fg-default));
+  border: 1px solid transparent;
+  /* The panel is a flat, bordered surface. A lifting, glowing primary button
+     belongs to a different design language, so it neither rises nor glows. */
+  box-shadow: none;
 }
 
 .gv-pm-save:hover {
-  background: oklch(0.6 0.2 158);
-  box-shadow: 0 4px 14px oklch(0.55 0.17 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.4);
-  transform: translateY(-1px);
-}
-
-.theme-host.dark-theme .gv-pm-save,
-body.dark-theme .gv-pm-save {
-  background: oklch(0.7 0.16 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)));
-  color: oklch(0.15 0.025 160);
-  box-shadow: 0 2px 8px oklch(0.7 0.16 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.3);
-}
-
-.theme-host.dark-theme .gv-pm-save:hover,
-body.dark-theme .gv-pm-save:hover {
-  background: oklch(0.7 0.2 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)));
-  box-shadow: 0 4px 14px oklch(0.7 0.16 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.4);
-}
-
-@media (prefers-color-scheme: dark) {
-  .gv-pm-save {
-    background: oklch(0.7 0.16 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)));
-    color: oklch(0.15 0.025 160);
-    box-shadow: 0 2px 8px oklch(0.7 0.16 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.3);
-  }
-
-  .gv-pm-save:hover {
-    background: oklch(0.7 0.2 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)));
-    box-shadow: 0 4px 14px oklch(0.7 0.16 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.4);
-  }
+  background: var(--gv-pm-brand-hover);
 }
 
 .gv-pm-cancel {
   background: transparent;
-  color: #e5e7eb;
-  border-radius: 8px;
-  padding: 6px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  /* Inherit the panel foreground instead of restating it per theme. */
+  color: inherit;
+  border: 1px solid oklch(0.92 0.004 250 / 0.9);
 }
 
 .gv-pm-cancel:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: oklch(0.14 0.004 285 / 0.05);
 }
 
-.theme-host.light-theme .gv-pm-cancel,
-body.light-theme .gv-pm-cancel {
-  color: #1f2937;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-}
+@media (prefers-color-scheme: dark) {
+  .gv-pm-cancel {
+    border-color: oklch(0.3 0.008 285 / 0.9);
+  }
 
-.theme-host.light-theme .gv-pm-cancel:hover,
-body.light-theme .gv-pm-cancel:hover {
-  background: rgba(0, 0, 0, 0.06);
+  .gv-pm-cancel:hover {
+    background: oklch(0.92 0.004 250 / 0.06);
+  }
 }
 
 .theme-host.dark-theme .gv-pm-cancel,
 body.dark-theme .gv-pm-cancel {
-  color: #e5e7eb;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-color: oklch(0.3 0.008 285 / 0.9);
 }
 
 .theme-host.dark-theme .gv-pm-cancel:hover,
 body.dark-theme .gv-pm-cancel:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: oklch(0.92 0.004 250 / 0.06);
+}
+
+.theme-host.light-theme .gv-pm-cancel,
+body.light-theme .gv-pm-cancel {
+  border-color: oklch(0.92 0.004 250 / 0.9);
+}
+
+.theme-host.light-theme .gv-pm-cancel:hover,
+body.light-theme .gv-pm-cancel:hover {
+  background: oklch(0.14 0.004 285 / 0.05);
 }
 
 .gv-pm-list {
@@ -3938,7 +3899,7 @@ body.dark-theme .gv-pm-notice.err {
 
 .gv-pm-panel[data-gv-theme='dark'] .gv-pm-add {
   background: oklch(0.7 0.16 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)));
-  color: oklch(0.15 0.025 160);
+  color: var(--gv-pm-brand-fg, var(--gv-pm-brand-fg-default));
 }
 
 .gv-pm-panel[data-gv-theme='dark'] .gv-pm-add:hover {
@@ -3997,43 +3958,27 @@ body.dark-theme .gv-pm-notice.err {
 .gv-pm-panel[data-gv-theme='dark'] .gv-pm-input-text,
 .gv-pm-panel[data-gv-theme='dark'] .gv-pm-input-tags,
 .gv-pm-panel[data-gv-theme='dark'] .gv-pm-input-name {
-  background: rgba(31, 41, 55, 0.5);
-  color: #e5e7eb;
-  border: 1.5px solid rgba(255, 255, 255, 0.08);
-}
-
-.gv-pm-panel[data-gv-theme='dark'] .gv-pm-input-text:focus,
-.gv-pm-panel[data-gv-theme='dark'] .gv-pm-input-tags:focus,
-.gv-pm-panel[data-gv-theme='dark'] .gv-pm-input-name:focus {
-  border-color: oklch(0.7 0.16 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.5);
-  box-shadow: 0 0 0 3px oklch(0.7 0.16 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.1);
-}
-
-.gv-pm-panel[data-gv-theme='dark'] .gv-pm-input-text::placeholder,
-.gv-pm-panel[data-gv-theme='dark'] .gv-pm-input-tags::placeholder,
-.gv-pm-panel[data-gv-theme='dark'] .gv-pm-input-name::placeholder {
-  color: #9ca3af;
-  opacity: 0.7;
+  background: oklch(0.92 0.004 250 / 0.04);
+  border-color: oklch(0.3 0.008 285 / 0.9);
 }
 
 .gv-pm-panel[data-gv-theme='dark'] .gv-pm-save {
-  background: oklch(0.7 0.16 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)));
-  color: oklch(0.15 0.025 160);
-  box-shadow: 0 2px 8px oklch(0.7 0.16 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.3);
+  background: var(--gv-pm-brand, var(--gv-pm-brand-default));
+  color: var(--gv-pm-brand-fg, var(--gv-pm-brand-fg-default));
+  box-shadow: none;
 }
 
 .gv-pm-panel[data-gv-theme='dark'] .gv-pm-save:hover {
-  background: oklch(0.7 0.2 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)));
-  box-shadow: 0 4px 14px oklch(0.7 0.16 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.4);
+  background: var(--gv-pm-brand-hover);
+  box-shadow: none;
 }
 
 .gv-pm-panel[data-gv-theme='dark'] .gv-pm-cancel {
-  color: #e5e7eb;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-color: oklch(0.3 0.008 285 / 0.9);
 }
 
 .gv-pm-panel[data-gv-theme='dark'] .gv-pm-cancel:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: oklch(0.92 0.004 250 / 0.06);
 }
 
 .gv-pm-panel[data-gv-theme='dark'] .gv-md-collapsed::after {
@@ -4191,7 +4136,7 @@ body.dark-theme .gv-pm-notice.err {
 }
 
 .gv-pm-panel[data-gv-theme='light'] .gv-pm-add:hover {
-  background: oklch(0.6 0.2 158);
+  background: var(--gv-pm-brand-hover);
 }
 
 .gv-pm-panel[data-gv-theme='light'] .gv-pm-lock {
@@ -4246,43 +4191,27 @@ body.dark-theme .gv-pm-notice.err {
 .gv-pm-panel[data-gv-theme='light'] .gv-pm-input-text,
 .gv-pm-panel[data-gv-theme='light'] .gv-pm-input-tags,
 .gv-pm-panel[data-gv-theme='light'] .gv-pm-input-name {
-  background: rgba(0, 0, 0, 0.04);
-  color: #1f2937;
-  border: 1.5px solid rgba(0, 0, 0, 0.08);
-}
-
-.gv-pm-panel[data-gv-theme='light'] .gv-pm-input-text:focus,
-.gv-pm-panel[data-gv-theme='light'] .gv-pm-input-tags:focus,
-.gv-pm-panel[data-gv-theme='light'] .gv-pm-input-name:focus {
-  border-color: oklch(0.55 0.17 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.5);
-  box-shadow: 0 0 0 3px oklch(0.55 0.17 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.08);
-}
-
-.gv-pm-panel[data-gv-theme='light'] .gv-pm-input-text::placeholder,
-.gv-pm-panel[data-gv-theme='light'] .gv-pm-input-tags::placeholder,
-.gv-pm-panel[data-gv-theme='light'] .gv-pm-input-name::placeholder {
-  color: #6b7280;
-  opacity: 0.7;
+  background: oklch(0.14 0.004 285 / 0.03);
+  border-color: oklch(0.92 0.004 250 / 0.9);
 }
 
 .gv-pm-panel[data-gv-theme='light'] .gv-pm-save {
-  background: oklch(0.55 0.17 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)));
-  color: oklch(0.99 0.01 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)));
-  box-shadow: 0 2px 8px oklch(0.55 0.17 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.3);
+  background: var(--gv-pm-brand, var(--gv-pm-brand-default));
+  color: var(--gv-pm-brand-fg, var(--gv-pm-brand-fg-default));
+  box-shadow: none;
 }
 
 .gv-pm-panel[data-gv-theme='light'] .gv-pm-save:hover {
-  background: oklch(0.6 0.2 158);
-  box-shadow: 0 4px 14px oklch(0.55 0.17 var(--gv-pm-brand-h, var(--gv-pm-brand-h-default)) / 0.4);
+  background: var(--gv-pm-brand-hover);
+  box-shadow: none;
 }
 
 .gv-pm-panel[data-gv-theme='light'] .gv-pm-cancel {
-  color: #1f2937;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-color: oklch(0.92 0.004 250 / 0.9);
 }
 
 .gv-pm-panel[data-gv-theme='light'] .gv-pm-cancel:hover {
-  background: rgba(0, 0, 0, 0.06);
+  background: oklch(0.14 0.004 285 / 0.05);
 }
 
 .gv-pm-panel[data-gv-theme='light'] .gv-md-collapsed::after {
@@ -11070,19 +10999,37 @@ body.gv-rtl .gv-pm-item-compact .gv-pm-bottom {
 .gv-pm-tooltip {
   position: fixed;
   z-index: 2147483647;
-  max-width: 360px;
-  max-height: 280px;
+  box-sizing: border-box;
+  max-width: 420px;
+  max-height: 360px;
   overflow: auto;
-  padding: 8px 10px;
-  border-radius: 8px;
-  font-size: 12px;
-  line-height: 1.5;
-  white-space: pre-wrap;
+  overscroll-behavior: contain;
+  padding: 12px 14px;
+  border-radius: 14px;
+  /* Pin the panel's font stack: without this the preview inherits the host
+     page's font (Gemini/Claude/ChatGPT each differ) while the panel beneath
+     it does not, so the two surfaces never look like one product. */
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    'Apple Color Emoji',
+    'Segoe UI Emoji';
+  font-size: 13px;
+  line-height: 1.6;
   word-break: break-word;
-  background: rgba(17, 24, 39, 0.98);
-  color: #f3f4f6;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  background: oklch(0.2 0.008 285);
+  color: oklch(0.92 0.004 250);
+  border: 1px solid oklch(0.3 0.008 285 / 0.7);
+  /* The panel is flat (box-shadow: none) because it is an anchored surface.
+     This one floats over arbitrary host-page content, so it keeps a shadow —
+     but a restrained one, sized to lift it off the page rather than to look
+     like a separate heavier layer. */
+  box-shadow: 0 6px 20px oklch(0 0 0 / 0.28);
   /* Interactive: users can move their mouse onto the tooltip and scroll it
    * to read long prompts. JS handles the hover-grace logic that keeps it
    * open while traveling from row → gap → tooltip. */
@@ -11092,6 +11039,15 @@ body.gv-rtl .gv-pm-item-compact .gv-pm-bottom {
   transition:
     opacity 0.12s ease,
     transform 0.12s ease;
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0.92 0.004 250 / 0.22) transparent;
+}
+
+/* Plain-text fallback shown for the instant before `marked` resolves (and if
+   it fails to load at all). Only this state needs newline preservation —
+   rendered Markdown must wrap normally. */
+.gv-pm-tooltip-raw {
+  white-space: pre-wrap;
 }
 
 /* While hidden, fully inert so stray scroll / click events don't catch it. */
@@ -11105,10 +11061,277 @@ body.gv-rtl .gv-pm-item-compact .gv-pm-bottom {
 }
 
 .gv-pm-tooltip[data-gv-theme='light'] {
-  background: rgba(255, 255, 255, 0.98);
-  color: #111827;
-  border-color: rgba(0, 0, 0, 0.08);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  background: oklch(0.995 0.002 250);
+  color: oklch(0.14 0.004 285);
+  border-color: oklch(0.92 0.004 250 / 0.7);
+  box-shadow: 0 6px 20px oklch(0 0 0 / 0.1);
+  scrollbar-color: oklch(0.14 0.004 285 / 0.22) transparent;
+}
+
+/* ----- Markdown typography inside the hover preview -----
+ * Prompts are authored as Markdown, so the preview renders it (same marked +
+ * KaTeX + DOMPurify path as the comfortable-mode list item). Host-page
+ * heading sizes would blow the card apart, so every block is re-scaled
+ * against the card's own 13px base and given tight, even rhythm. */
+.gv-pm-tooltip .gv-md > :first-child {
+  margin-top: 0;
+}
+
+.gv-pm-tooltip .gv-md > :last-child {
+  margin-bottom: 0;
+}
+
+.gv-pm-tooltip .gv-md h1,
+.gv-pm-tooltip .gv-md h2,
+.gv-pm-tooltip .gv-md h3,
+.gv-pm-tooltip .gv-md h4,
+.gv-pm-tooltip .gv-md h5,
+.gv-pm-tooltip .gv-md h6 {
+  margin: 0.9em 0 0.35em;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.gv-pm-tooltip .gv-md h1 {
+  font-size: 15px;
+}
+
+.gv-pm-tooltip .gv-md h2 {
+  font-size: 14px;
+}
+
+.gv-pm-tooltip .gv-md h3,
+.gv-pm-tooltip .gv-md h4,
+.gv-pm-tooltip .gv-md h5,
+.gv-pm-tooltip .gv-md h6 {
+  font-size: 13px;
+}
+
+.gv-pm-tooltip .gv-md p,
+.gv-pm-tooltip .gv-md ul,
+.gv-pm-tooltip .gv-md ol,
+.gv-pm-tooltip .gv-md blockquote,
+.gv-pm-tooltip .gv-md pre,
+.gv-pm-tooltip .gv-md table {
+  margin: 0 0 0.55em;
+}
+
+.gv-pm-tooltip .gv-md ul,
+.gv-pm-tooltip .gv-md ol {
+  padding-inline-start: 1.35em;
+}
+
+.gv-pm-tooltip .gv-md li {
+  margin: 0 0 0.2em;
+}
+
+.gv-pm-tooltip .gv-md li > ul,
+.gv-pm-tooltip .gv-md li > ol {
+  margin: 0.2em 0 0;
+}
+
+.gv-pm-tooltip .gv-md blockquote {
+  padding-inline-start: 0.75em;
+  border-inline-start: 2px solid currentcolor;
+  opacity: 0.75;
+}
+
+.gv-pm-tooltip .gv-md hr {
+  height: 1px;
+  margin: 0.9em 0;
+  border: 0;
+  background: currentcolor;
+  opacity: 0.16;
+}
+
+.gv-pm-tooltip .gv-md code {
+  padding: 0.1em 0.34em;
+  border-radius: 5px;
+  background: oklch(0.92 0.004 250 / 0.12);
+  font-size: 0.92em;
+}
+
+.gv-pm-tooltip .gv-md pre {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: oklch(0.92 0.004 250 / 0.09);
+}
+
+.gv-pm-tooltip .gv-md pre code {
+  padding: 0;
+  border-radius: 0;
+  background: none;
+}
+
+.gv-pm-tooltip .gv-md a {
+  color: inherit;
+  text-underline-offset: 2px;
+}
+
+.gv-pm-tooltip .gv-md img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.gv-pm-tooltip[data-gv-theme='light'] .gv-md code {
+  background: oklch(0.14 0.004 285 / 0.08);
+}
+
+.gv-pm-tooltip[data-gv-theme='light'] .gv-md pre {
+  background: oklch(0.14 0.004 285 / 0.06);
+}
+
+/* ----- Template variables -----
+ * A prompt is a template only when it carries `{{name}}` placeholders. Two
+ * surfaces: a chip that advertises them wherever a body is rendered, and the
+ * fill card that collects their values before the text reaches the composer. */
+
+.gv-pm-var {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  padding: 0 5px;
+  border-radius: 5px;
+  background: var(--gv-pm-brand-soft);
+  color: var(--gv-pm-brand, var(--gv-pm-brand-default));
+  /* The underline is what reads as "a blank to fill", not just "code". */
+  box-shadow: inset 0 -1.5px 0 var(--gv-pm-brand, var(--gv-pm-brand-default));
+  white-space: nowrap;
+}
+
+.gv-pm-fill {
+  position: fixed;
+  z-index: 2147483646;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: min(460px, calc(100vw - 24px));
+  max-height: 60vh;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 16px 18px 14px;
+  border-radius: 14px;
+  /* Same pinned stack as the panel: the host page's font must not leak in. */
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    'Apple Color Emoji',
+    'Segoe UI Emoji';
+  font-size: 13px;
+  background: oklch(0.2 0.008 285);
+  color: oklch(0.92 0.004 250);
+  border: 1px solid oklch(0.3 0.008 285 / 0.7);
+  box-shadow: 0 8px 26px oklch(0 0 0 / 0.32);
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0.92 0.004 250 / 0.22) transparent;
+}
+
+.gv-pm-fill[data-gv-theme='light'] {
+  background: oklch(0.995 0.002 250);
+  color: oklch(0.14 0.004 285);
+  border-color: oklch(0.92 0.004 250 / 0.7);
+  box-shadow: 0 8px 26px oklch(0 0 0 / 0.12);
+  scrollbar-color: oklch(0.14 0.004 285 / 0.22) transparent;
+}
+
+.gv-pm-fill-title {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.gv-pm-fill-doc {
+  /* Prompt bodies carry their own line breaks, and the text runs are inserted
+     as raw text nodes around the slots. */
+  white-space: pre-wrap;
+  word-break: break-word;
+  /* Loose enough that an inline input never crowds the line above it. */
+  line-height: 2.1;
+  color: inherit;
+}
+
+/* The slot is a blank in a sentence, so it is drawn as a rule under the words
+   rather than as another boxed field. */
+/* Off-screen ruler for slot auto-sizing: same font and padding as the slot, so
+   its measured width is the width the slot needs. */
+/* `fixed`, not `absolute`: the sizer's parent is the fill surface, which is
+   `overflow: auto`. An absolutely positioned child is measured into that box's
+   scrollable overflow, and `left: -9999px` only escapes it while the surface is
+   LTR - an RTL host page turns that into end-side overflow, giving every fill
+   surface a horizontal scrollbar that pans the sentence off-screen. A fixed box
+   contributes to no ancestor's scrollable overflow at all. Its containing block
+   is the viewport, exactly like the surface itself, so this adds no dependency
+   the surface does not already have. */
+.gv-pm-slot-sizer {
+  position: fixed;
+  top: 0;
+  left: -9999px;
+  visibility: hidden;
+  white-space: pre;
+  pointer-events: none;
+  box-sizing: border-box;
+  font: inherit;
+  padding: 0 5px 1px;
+}
+
+.gv-pm-slot {
+  box-sizing: border-box;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  border-bottom: 1.5px solid var(--gv-pm-brand, var(--gv-pm-brand-default));
+  border-radius: 0;
+  padding: 0 5px 1px;
+  margin: 0 1px;
+  text-align: center;
+  min-width: 4.5em;
+  outline: none;
+}
+
+.gv-pm-slot::placeholder {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  color: var(--gv-pm-brand, var(--gv-pm-brand-default));
+  opacity: 0.75;
+}
+
+.gv-pm-slot:focus {
+  background: var(--gv-pm-brand-soft);
+}
+
+.gv-pm-fill-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+body.gv-rtl .gv-pm-fill-doc {
+  direction: rtl;
+}
+
+/* Offered only while the body would actually change under the rewrite, so the
+   form carries no permanent chrome for a one-off migration. */
+.gv-pm-convert-braces {
+  justify-self: start;
+  font: inherit;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--gv-pm-brand, var(--gv-pm-brand-default));
+  background: var(--gv-pm-brand-soft);
+  border: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.gv-pm-convert-braces:hover {
+  border-color: var(--gv-pm-brand, var(--gv-pm-brand-default));
 }
 
 /* ----- Slash prompt completion ----- */
@@ -14842,4 +15065,22 @@ body.gv-rtl .gv-ph-panel {
     top: 64px;
     max-height: calc(100dvh - 76px);
   }
+}
+
+/* ----- Gemini compatibility: edit-mode action row -----
+ * Gemini right-aligns the Cancel/Update row with `justify-self: flex-end` on
+ * `.edit-button-area`, which is a block-level flex container inside a block
+ * parent. Self-alignment in block layout is a Chrome-only feature today, so
+ * Safari drops the declaration, the row stretches to the full container width
+ * per spec, and its `justify-content: flex-start` parks both buttons at the far
+ * left, detached from the edit box they belong to.
+ *
+ * Reproduce the same result with properties every engine implements. Measured
+ * against Gemini's own layout: Chrome renders x=904 w=172 with and without this
+ * rule, and Safari matches that instead of x=352 w=724. `!important` is
+ * required because Gemini's own `margin: 0` rule carries two attribute
+ * selectors and would otherwise win. */
+.user-query-container .edit-button-area {
+  width: fit-content !important;
+  margin-inline-start: auto !important;
 }

@@ -146,3 +146,20 @@ mirrors, clear markers, or Drive sync.
   `src/pages/content/timeline/__tests__/TimelineStateIdentity.test.ts`, and
   `src/pages/content/timestamp/__tests__/historyTimestamps.test.ts` cover complete-map identity and
   safe legacy handling.
+
+## A failed account-scope resolution must retry, not leave the folder store unbound
+
+- **Trap:** `FolderStore.refreshAccountScope()` clears `dataSession` before resolving, and its catch
+  only logged. One failed round trip therefore left the store unbound for the rest of the page load:
+  the panel rendered empty even though the account bucket held folders, and every later edit was
+  applied in memory and repainted while `saveData()` dropped it at the `!session` guard — a folder
+  the user created looked saved and was gone on reload. Firefox is the only target that resolves the
+  scope through the background page (`AccountIsolationService.shouldResolveScopeInBackground`), so
+  it alone can fail this way, and only Gemini was exposed: `aistudio.ts` recovers through its
+  1200 ms account poller. Nothing self-healed until the next SPA account-route change.
+- **Rule:** Retry a failed resolution a bounded number of times with growing gaps, then stop. Never
+  fall back to the global `gvFolderData` bucket — an ownerless bucket can belong to another account.
+  Clear the pending retry in `destroy()` and let a newer `accountScopeRequest` supersede it.
+- **Guard:** `src/pages/content/folder/FolderStore.test.ts`
+  (`retries a failed account-scope resolution instead of staying unbound`,
+  `gives up after a bounded number of account-scope retries`).

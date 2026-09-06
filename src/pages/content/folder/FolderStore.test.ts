@@ -77,6 +77,54 @@ describe('FolderStore ownership', () => {
     vi.restoreAllMocks();
   });
 
+  it('retries a failed account-scope resolution instead of staying unbound', async () => {
+    // Firefox resolves the scope through the background page, so one unanswered
+    // round trip used to leave the store unbound for the rest of the page load:
+    // the panel renders empty and every edit is dropped by saveData().
+    vi.mocked(accountIsolationService.isIsolationEnabled).mockResolvedValue(true);
+    const resolve = vi
+      .spyOn(accountIsolationService, 'resolveAccountScope')
+      .mockRejectedValueOnce(new Error('background not listening'))
+      .mockResolvedValue({
+        accountKey: 'acct-a',
+        accountId: 0,
+        routeUserId: '0',
+        emailHash: 'hash-a',
+      });
+
+    await store.setAccountIsolationEnabled(true);
+
+    // First attempt failed. The store is unbound, so the folder is created in
+    // memory and repainted, but the write is silently dropped — the bug.
+    expect(resolve).toHaveBeenCalledTimes(1);
+    store.createFolder('While unbound');
+    await vi.advanceTimersByTimeAsync(350);
+    expect(adapter.saveData).not.toHaveBeenCalled();
+
+    // The retry rebinds the store without ever touching the global bucket.
+    await vi.advanceTimersByTimeAsync(400);
+    expect(resolve).toHaveBeenCalledTimes(2);
+    store.createFolder('After recovery');
+    await vi.advanceTimersByTimeAsync(350);
+    // Bound to the account bucket, never to the ownerless global one.
+    const keys = vi.mocked(adapter.saveData).mock.calls.map((call) => call[0]);
+    expect(keys).toHaveLength(1);
+    expect(keys[0]).toMatch(/^gvFolderData:acct:/);
+  });
+
+  it('gives up after a bounded number of account-scope retries', async () => {
+    vi.mocked(accountIsolationService.isIsolationEnabled).mockResolvedValue(true);
+    const resolve = vi
+      .spyOn(accountIsolationService, 'resolveAccountScope')
+      .mockRejectedValue(new Error('background never answers'));
+
+    await store.setAccountIsolationEnabled(true);
+    await vi.advanceTimersByTimeAsync(60_000);
+
+    // One initial attempt plus ACCOUNT_SCOPE_RETRY_DELAYS.length retries, then silence.
+    expect(resolve).toHaveBeenCalledTimes(4);
+  });
+
   it('records recency without immediately reordering the visible folder list', async () => {
     const beforeIds = store.data.folderContents.root.map(
       (conversation) => conversation.conversationId,

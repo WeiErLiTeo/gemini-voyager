@@ -268,6 +268,76 @@ drop, or hover layout.
 - **Guard:** `src/pages/content/chatWidth/__tests__/chatWidth.test.ts` and
   `src/pages/content/editInputWidth/__tests__/editInputWidth.test.ts`.
 
+## Template placeholders must stay on double braces
+
+- **Trap:** Prompt bodies render through `marked` with `marked-katex-extension`, so a single-brace
+  placeholder syntax would claim `{a}` and `{b}` out of `\frac{a}{b}`, and the `{` in any JSON
+  snippet a prompt happens to quote. Widening the syntax looks like a small convenience and
+  silently corrupts every maths and code prompt in the library.
+- **Rule:** Only `{{name}}` is a placeholder, and a prompt is a template only when it contains one,
+  so a body without them keeps exactly its previous behaviour. `\{{` escapes a literal opener.
+  Migration from single braces is an explicit author action (`convertLegacyBraces` behind the
+  form's button), never inferred: only the author knows whether a given `{x}` is a placeholder or
+  prose. Anything that has to find placeholders in already-rendered text builds its matcher from
+  `TEMPLATE_VARIABLE_SOURCE` rather than copying the character class.
+- **Guard:** `src/features/prompt/model/__tests__/promptTemplate.test.ts` asserts that
+  `\frac{a}{b}` and `{"role": "user"}` yield no variables, and that the escape survives parsing.
+
+## Prompt panel accent must come from the brand token, not a rebuilt hue
+
+- **Trap:** The prompt panel's form controls are themed in three parallel layers: the base rules, a
+  `prefers-color-scheme` / `.theme-host.<theme>` layer, and a `.gv-pm-panel[data-gv-theme='…']`
+  layer. The panel always carries `data-gv-theme`, so that last layer is the one that renders.
+  `.gv-pm-save` rebuilt its colour as `oklch(0.55 0.17 var(--gv-pm-brand-h))` — keeping only the
+  hue — and then hardcoded hue 158 in `:hover` and hue 160 in the dark foreground. A user's custom
+  accent therefore lost its chroma at rest and snapped back to the default green on hover.
+- **Rule:** Paint accent surfaces with `var(--gv-pm-brand, var(--gv-pm-brand-default))`,
+  `var(--gv-pm-brand-fg, …)` and `var(--gv-pm-brand-hover)`. The `*-default` tokens are already
+  theme-scoped for `:root`, `prefers-color-scheme: dark`, `.theme-host.dark-theme` and
+  `.theme-host.light-theme`, so a token-driven rule adapts without a per-theme copy. Reserve
+  `oklch(… var(--gv-pm-brand-h) / <alpha>)` for translucent washes, never for a solid fill. When
+  restyling one layer, update the `data-gv-theme` layer too or the change never ships.
+- **Guard:** `src/pages/content/prompt/__tests__/promptFormStyle.test.ts`. Every `.gv-pm-save` block
+  that sets a background must resolve it through a brand token, and no `.gv-pm-save` / `.gv-pm-add`
+  block may contain a literal hue 158 or 160.
+
+## Gemini's edit-mode actions rely on block-level `justify-self`
+
+- **Trap:** Gemini right-aligns the Cancel/Update row with `justify-self: flex-end` on
+  `.edit-button-area`, a block-level flex container inside a `display: block` parent.
+  Self-alignment in block layout is a Chrome-only feature today. Safari drops the declaration, so
+  the row stretches to the full container width per spec and its own `justify-content: flex-start`
+  parks both buttons at the far left, visually detached from the edit box. Measured on the live
+  page: Chrome `x=904 w=172`, Safari `x=352 w=724`, with every other element in the edit tree
+  identical. No Voyager module targets this element, and the width sliders do not need to be
+  enabled for it to happen — do not start by suspecting `editInputWidth`.
+- **Rule:** Reproduce Gemini's intended result with properties every engine implements:
+  `width: fit-content` plus `margin-inline-start: auto` on `.user-query-container
+.edit-button-area`. Both need `!important` because Gemini's own `margin: 0` rule carries two
+  attribute selectors. Keep the margin logical so the row still lands on the inline end in RTL.
+  Verified as a no-op in Chrome: the row measures `x=904 w=172` with and without the shim.
+- **Guard:** `src/pages/content/__tests__/geminiEditActionsStyle.test.ts`. The shim must keep both
+  `!important` declarations, must not use a physical `margin-left`, and its selector must match the
+  edit-mode row without catching an unrelated `.edit-button-area`.
+
+## Edit input width desynced Cancel/Update from the edit box
+
+- **Trap:** Gemini's edit mode nests two `.edit-container` elements. The outer one holds both the
+  prompt box and `.edit-button-area` (Cancel/Update); the inner one sits inside
+  `.query-content.edit-mode` and starts indented by that element's horizontal padding.
+  `editInputWidth` matched both with `.edit-mode .edit-container` and gave them the same
+  `width: min(100%, <slider>)`, without `box-sizing: border-box`. Measured live at 60%: the outer
+  container ended at x=1036 and the form field at x=1088, so the box overhung the button row by
+  exactly the padding and the actions no longer sat under it.
+- **Rule:** The slider width belongs to the outermost edit container only. Anything nested
+  (`.edit-mode .edit-container .edit-container`, `.edit-mode .edit-container .query-content.edit-mode`)
+  must be `width: 100%` so it fills that owner instead of re-clamping from a different left offset.
+  Every selector that carries a width must also carry `box-sizing: border-box`, because these
+  containers have horizontal padding.
+- **Guard:** `src/pages/content/editInputWidth/__tests__/editInputWidth.test.ts`. The nested-fill
+  selector is read back out of the injected CSS and run against Gemini's real edit-mode shape: it
+  must match the inner container and `.query-content.edit-mode`, and must not match the outer one.
+
 ## Compact timeline preview hover gap closes panel
 
 - **Trap:** In compact timeline mode, moving the pointer from the rail to the preview panel could
@@ -281,3 +351,51 @@ drop, or hover layout.
 - **Guard:** `src/pages/content/timeline/__tests__/TimelinePreviewPanel.test.ts`
   (`keeps the panel open while the pointer pauses in the compact hover gap`,
   `treats the compact hover bridge as part of the preview interaction area`).
+
+## A panel remount must not close the folder dialogs that hold unsaved input
+
+- **Trap:** `onPanelUnmount` called `dialogs.closeAll()`, and `FolderSidebarRuntime` runs that same
+  unmount when Gemini rebuilds its sidebar, not only on stop. A folder instructions editor or
+  move-to-folder picker open at that moment vanished mid-edit and took the typed text with it. The
+  two are body-level overlays with no tie to the sidebar, so nothing about the rebuild required
+  closing them.
+- **Rule:** Give the unmount a reason. `stop` closes everything; `remount` closes only the transient
+  views. A view is transient unless it is a body-level modal holding user input — the colour picker,
+  delete confirmations and context menus are anchored to a sidebar row and would otherwise be
+  stranded at stale coordinates against a rebuilt list, so those must still close.
+- **Guard:** `src/pages/content/folder/folderDialogs.test.ts`
+  (`keeps the input-bearing modals across a panel remount and drops the anchored ones`).
+
+## Template fill slots must be measured, not sized by the `size` attribute
+
+- **Trap:** `openTemplateFill` created each inline slot as `<input type="text">` with
+  `slot.size = Math.max(variableName.length, 4)`, set once at creation and never updated. Typing a
+  value longer than the variable name left the box at its original width with the text scrolling
+  horizontally inside it, so the sentence the slots sit in visibly broke apart. Measured live on
+  gemini.google.com: a slot for `{{topic}}` stayed 68.5 px wide while `一个 AI 的可解释性研究方向`
+  needed 171 px. `size` could not have fixed it either — it counts characters against an average
+  Latin advance, so a CJK value is about twice as wide as the attribute claims.
+- **Rule:** Size an inline slot from a hidden sizer span that inherits the slot's font and padding,
+  and re-fit on every `input` — including the peer slots that mirror a repeated variable. Fit after
+  the surface is in the document, since nothing is measurable before it inherits its font.
+- **Guard:** `src/pages/content/prompt/__tests__/PromptTemplateFill.test.ts`
+  (`grows a slot to fit what is typed into it, and its repeats too`).
+
+## An off-canvas measuring span must not be `position: absolute` inside a scroll container
+
+- **Trap:** `.gv-pm-slot-sizer` parked itself at `position: absolute; left: -9999px` inside
+  `.gv-pm-fill`, which is `overflow: auto`. `visibility: hidden` does not remove a box from its
+  ancestor's scrollable overflow, and the `-9999px` escape only works while that ancestor is LTR:
+  overflow past the inline-start edge is unreachable, so no scrollbar appears. On an RTL host page
+  the surface inherits `direction: rtl` from the page — `body.gv-rtl` is only a scoping hook and
+  never sets `direction` itself — which makes the same offset end-side overflow. Every template fill
+  surface then carries a horizontal scrollbar, and a wheel or trackpad gesture pans the sentence
+  off-screen.
+- **Rule:** Measure with a `position: fixed` span, not an absolute one. A fixed box contributes to no
+  ancestor's scrollable overflow in either direction. It is safe here because its containing block is
+  the viewport, exactly like `.gv-pm-fill` itself, so it adds no dependency the surface does not
+  already have — but that holds only while no ancestor carries `transform`, `filter` or `contain`,
+  which would re-contain the fixed box and would already be mispositioning the surface.
+- **Guard:** `src/pages/content/prompt/__tests__/promptFormStyle.test.ts`
+  (`keeps the slot sizer out of the fill surface scroll region`), which also pins the
+  no-transform premise on `.gv-pm-fill`.
